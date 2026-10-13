@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://brh2x4tfq4lt8"]
+
+[ext_resource type="Script" uid="uid://bbj63ftf4ej4e" path="res://scripts/puzle_2_poster.gd" id="1_1cj86"]
+[ext_resource type="Texture2D" uid="uid://b1qa3k0qkh3tx" path="res://addons/at-icons/animation/chess_king.svg" id="1_1ta5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_plx7o"]
+radius = 150.01334
+
+[node name="puzle_2" type="Area2D" unique_id=1038551114]
+script = ExtResource("1_1cj86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=275752325]
+shape = SubResource("CircleShape2D_plx7o")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1492579539]
+texture_filter = 3
+scale = Vector2(12.489061, 10.828704)
+texture = ExtResource("1_1ta5x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

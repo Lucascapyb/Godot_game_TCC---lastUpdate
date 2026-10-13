@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://c3sughepu0xj8"]
+
+[ext_resource type="Script" uid="uid://ciap6h7hkq6b4" path="res://scripts/controles.gd" id="1_wq417"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="2_wq417"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bhunq"]
+font = ExtResource("2_wq417")
+font_size = 44
+font_color = Color(0, 1, 0.15625, 1)
+
+[node name="Controles" type="CanvasLayer" unique_id=1915705132]
+script = ExtResource("1_wq417")
+
+[node name="bg_overlay" type="ColorRect" parent="." unique_id=83079424]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -41.0
+offset_right = -6.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.15686275)
+
+[node name="MainConteiner" type="VBoxContainer" parent="." unique_id=1121462604]
+offset_left = 591.0
+offset_top = 152.0
+offset_right = 1463.0
+offset_bottom = 881.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainConteiner" unique_id=226548816]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainConteiner/HBoxContainer" unique_id=109517616]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=879440067]
+layout_mode = 2
+text = "-------------------------------------------
+	Principais controles: 
+esc - menu 
+Botão direito do mouse - movimentação
+\"E\" - Interagir com NPCs e objetos
+
+	Controles Chat:
+Space (espaço) - Abrir monitor de chat IA
+
+comandos: 
+ASK: Faça qualquer pergunta após este comando
+SKIP: Saia da tela de chat
+-------------------------------------------"
+label_settings = SubResource("LabelSettings_bhunq")
+
+[node name="Button2" type="Button" parent="." unique_id=1821429659]
+offset_left = 4.0
+offset_top = 17.000002
+offset_right = 405.0
+offset_bottom = 83.0
+scale = Vector2(1.0832435, 1.3794425)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_wq417")
+theme_override_font_sizes/font_size = 44
+text = "Voltar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

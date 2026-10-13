@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://10pct43vv0w2"]
+
+[ext_resource type="Script" uid="uid://b7rdajw7owxlh" path="res://scripts/Tela_Registro.gd" id="1_7tyru"]
+[ext_resource type="Texture2D" uid="uid://dujm4hxn84vl7" path="res://assets/ui/art/telaa.png" id="1_bjdtc"]
+[ext_resource type="Texture2D" uid="uid://b86yunm02yaf4" path="res://assets/ui/art/7.png" id="3_bjdtc"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="4_4xuiw"]
+
+[node name="Tela_Registro" type="CanvasLayer" unique_id=1143293668]
+script = ExtResource("1_7tyru")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2053906827]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1764706)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=575720219]
+visible = false
+offset_left = 222.0
+offset_top = -5.0
+offset_right = 1486.0
+offset_bottom = 1259.0
+scale = Vector2(1.316234, 0.8767672)
+texture = ExtResource("1_bjdtc")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=2070888424]
+offset_left = 344.99997
+offset_top = -6.0
+offset_right = 1609.0
+offset_bottom = 1258.0
+scale = Vector2(0.7620783, 0.5428335)
+texture = ExtResource("3_bjdtc")
+
+[node name="Button2" type="Button" parent="." unique_id=6247969]
+process_mode = 3
+offset_left = 262.0
+offset_top = 6.0
+offset_right = 663.0
+offset_bottom = 72.0
+scale = Vector2(0.7963772, 1.2234869)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_4xuiw")
+theme_override_font_sizes/font_size = 44
+text = "Voltar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

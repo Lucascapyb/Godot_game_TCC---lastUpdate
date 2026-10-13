@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bhtw7jvho8e4c"]
+
+[ext_resource type="Script" uid="uid://by54mxednptdp" path="res://scripts/Tela_Cracha.gd" id="1_hqo13"]
+[ext_resource type="Texture2D" uid="uid://dujm4hxn84vl7" path="res://assets/ui/art/telaa.png" id="1_tq3et"]
+[ext_resource type="Texture2D" uid="uid://y4albwy2pttr" path="res://assets/ui/art/Cracha_game_tcc.png" id="3_xnqqv"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="4_vjy45"]
+
+[node name="Tela_Cracha" type="CanvasLayer" unique_id=984242366]
+script = ExtResource("1_hqo13")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=832066145]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1764706)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1366131108]
+visible = false
+offset_left = 222.0
+offset_top = -5.0
+offset_right = 1486.0
+offset_bottom = 1259.0
+scale = Vector2(1.316234, 0.8767672)
+texture = ExtResource("1_tq3et")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1860752894]
+offset_left = 344.99997
+offset_top = -6.0
+offset_right = 1609.0
+offset_bottom = 1258.0
+scale = Vector2(1.1211443, 0.85846406)
+texture = ExtResource("3_xnqqv")
+
+[node name="Button2" type="Button" parent="." unique_id=2031903353]
+process_mode = 3
+offset_left = 509.0
+offset_top = 56.0
+offset_right = 910.0
+offset_bottom = 122.0
+scale = Vector2(0.7963772, 1.2234869)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_vjy45")
+theme_override_font_sizes/font_size = 44
+text = "Voltar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

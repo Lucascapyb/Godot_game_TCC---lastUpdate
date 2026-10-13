@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://uhia0annuf5k"]
+
+[ext_resource type="Script" uid="uid://kdngxpfeu7p8" path="res://scripts/pc_puzle_2.gd" id="1_dmx8k"]
+[ext_resource type="Texture2D" uid="uid://dk72djqlj67ae" path="res://assets/ui/art/Okay, now I want you to create a character a man wearing a gray shirt with orange hair—cartoon style is fine. He is standing in a semi-profile pose, looking worried and holding a flashlight.png" id="1_qhxo1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmx8k"]
+radius = 150.01334
+
+[node name="PC_puzle_2" type="Area2D" unique_id=1012019453]
+script = ExtResource("1_dmx8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=927607464]
+shape = SubResource("CircleShape2D_dmx8k")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1512540509]
+texture_filter = 3
+position = Vector2(-3, 10)
+scale = Vector2(0.17512718, 0.17593035)
+texture = ExtResource("1_qhxo1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

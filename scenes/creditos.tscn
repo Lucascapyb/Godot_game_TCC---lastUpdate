@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://ca6hh530meqbn"]
+
+[ext_resource type="Texture2D" uid="uid://wppadeyv34lk" path="res://assets/ui/art/Game Studio S.A.R.A_protocol logo.png" id="1_jddgq"]
+[ext_resource type="Script" uid="uid://duvaah0dfnmcb" path="res://scripts/creditos.gd" id="1_lgbdq"]
+[ext_resource type="Texture2D" uid="uid://bkrfgn1os6mpd" path="res://assets/ui/art/udf-centro-universitario-do-distrito-federal.webp" id="2_lgbdq"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="3_ul0vb"]
+
+[node name="Creditos" type="CanvasLayer" unique_id=2141249904]
+script = ExtResource("1_lgbdq")
+
+[node name="bg_overlay" type="ColorRect" parent="." unique_id=1708629363]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -41.0
+offset_right = -6.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="TextureRect" parent="bg_overlay" unique_id=548243740]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 553.0
+offset_top = -294.0
+offset_right = 633.0
+offset_bottom = 1706.0
+grow_horizontal = 2
+scale = Vector2(0.40258288, 0.41207305)
+texture = ExtResource("1_jddgq")
+
+[node name="Logo2" type="TextureRect" parent="bg_overlay" unique_id=1917616006]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 762.0
+offset_top = 821.0
+offset_right = 135.01123
+offset_bottom = 1542.7773
+grow_horizontal = 2
+scale = Vector2(0.29543436, 0.29560155)
+texture = ExtResource("2_lgbdq")
+
+[node name="MadeBy" type="HBoxContainer" parent="." unique_id=65346305]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = -707.0
+offset_right = 287.0
+offset_bottom = -641.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MadeBy" unique_id=752349962]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Feito por"
+
+[node name="Button" type="Button" parent="MadeBy" unique_id=1463095251]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Lucas Araujo e Silva Cruz"
+flat = true
+
+[node name="MadeBy2" type="HBoxContainer" parent="." unique_id=2107932585]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = -623.0
+offset_right = 287.0
+offset_bottom = -557.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MadeBy2" unique_id=634287237]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Orientado por"
+
+[node name="Button" type="Button" parent="MadeBy2" unique_id=1638394866]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Prof. Kadidja Valeria Reginaldo De Oliveira
+"
+flat = true
+
+[node name="MadeBy3" type="HBoxContainer" parent="." unique_id=1458758924]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -608.0
+offset_top = -395.0
+offset_right = 674.0
+offset_bottom = -329.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MadeBy3" unique_id=835536556]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Trabalho de Conclusão de Curso em "
+
+[node name="Button" type="Button" parent="MadeBy3" unique_id=731299569]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Ciencia da Computação "
+flat = true
+
+[node name="Label2" type="Label" parent="MadeBy3" unique_id=553738411]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "pela intituição:"
+
+[node name="Button2" type="Button" parent="." unique_id=407992504]
+offset_left = 4.0
+offset_top = 17.000002
+offset_right = 405.0
+offset_bottom = 83.0
+scale = Vector2(1.0832435, 1.3794425)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_ul0vb")
+theme_override_font_sizes/font_size = 44
+text = "Voltar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

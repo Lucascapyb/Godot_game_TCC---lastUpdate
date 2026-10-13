@@ -2,8 +2,10 @@ extends CharacterBody2D
 @export var agent: NavigationAgent2D
 @export var anim_tree: AnimationTree
 @export var speed: float = 8
+@export var vision_light: PointLight2D  
 var state_machine
 var follow_mouse : bool = false
+var facing_direction := Vector2.DOWN  
 
 func _ready():
 	state_machine = anim_tree.get("parameters/playback")
@@ -43,5 +45,7 @@ func _update_animation(direction: Vector2):
 
 	if direction.length() > 0.1:
 		state_machine.travel("Run")
+		facing_direction = direction  # NOVO
+		vision_light.rotation = facing_direction.angle()  # NOVO
 	else:
 		state_machine.travel("Idle")

@@ -1,0 +1,49 @@
+[gd_resource type="Theme" format=3 uid="uid://wda66uf3jje1"]
+
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="1_2ecpj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgrm8"]
+bg_color = Color(1, 0.3764706, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xugqd"]
+bg_color = Color(1, 0.3764706, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk0v2"]
+bg_color = Color(0.9296875, 0.578559, 0.072631836, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsxee"]
+bg_color = Color(1, 0.3764706, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_2ecpj")
+Button/styles/focus = SubResource("StyleBoxFlat_mgrm8")
+Button/styles/hover = SubResource("StyleBoxFlat_xugqd")
+Button/styles/normal = SubResource("StyleBoxFlat_qk0v2")
+Button/styles/pressed = SubResource("StyleBoxFlat_wsxee")

@@ -1,0 +1,13 @@
+~ start
+Bot: Olá! Bem-vindo à instalação D.E.L.T.A.
+Bot: Você pode acessar o Painel/Assistente S.A.R.A pelo painel principal (tecla espaço).
+- Entendido!
+	Bot: Excelente! Com a Assistente S.A.R.A, percorra o complexo e recupere as duas chaves: "Vermelha" e "Azul".
+	Bot: Assim você poderá acessar o computador principal e reiniciar o Sistema!
+	- Chaves? Para que elas servem?
+	Bot: Como você é o cientista desta instalação, é o único com acesso ao painel principal. Por isso, precisa recuperar as chaves de segurança e prosseguir!
+	- E por que eu preciso reiniciar tudo?
+	Bot: Pois o Sistema principal da instalação D.E.L.T.A depende disso... Caso contrário, serão milhões perdidos.
+	- Compreendo...
+	Bot: Ótimo. Boa sorte!
+=> END

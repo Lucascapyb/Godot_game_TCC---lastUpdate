@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://df6p8hnxjy8sy"]
+
+[ext_resource type="Theme" uid="uid://wda66uf3jje1" path="res://botoes_defalt.tres" id="1_uy60t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhunq"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=1206701071]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_scale = Vector2(2, 2)
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=774230736]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1258181488]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Start_btn" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1990305049]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_uy60t")
+text = "START
+
+"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer" unique_id=1977649811]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bhunq")
+
+[node name="Credit_btn" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1331880492]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_uy60t")
+text = "CREDITS
+
+"
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer" unique_id=74726027]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bhunq")
+
+[node name="Quit_btn" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1981245183]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_uy60t")
+text = "QUIT GAME
+"

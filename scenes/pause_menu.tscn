@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://c2xos8f34303j"]
+
+[ext_resource type="Script" uid="uid://bh3x3g2wqq7jk" path="res://scripts/menu_jogo.gd" id="1_5d2l8"]
+[ext_resource type="Texture2D" uid="uid://wppadeyv34lk" path="res://assets/ui/art/Game Studio S.A.R.A_protocol logo.png" id="1_kukqi"]
+[ext_resource type="Theme" uid="uid://wda66uf3jje1" path="res://botoes_defalt.tres" id="2_5d2l8"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="3_7l7mv"]
+[ext_resource type="PackedScene" uid="uid://c3sughepu0xj8" path="res://scenes/controles.tscn" id="5_7l7mv"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7l7mv"]
+action = &"Config"
+
+[sub_resource type="Shortcut" id="Shortcut_5d2l8"]
+events = [SubResource("InputEventAction_7l7mv")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4r4p"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=982177676]
+process_mode = 3
+script = ExtResource("1_5d2l8")
+
+[node name="bg_overlay" type="ColorRect" parent="." unique_id=558118251]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -41.0
+offset_right = -6.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2509804)
+metadata/_edit_use_anchors_ = true
+
+[node name="Logo" type="TextureRect" parent="bg_overlay" unique_id=199238617]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 0.9999981
+offset_right = -60.0
+offset_bottom = 2001.0
+grow_horizontal = 2
+scale = Vector2(0.49028933, 0.51316035)
+texture = ExtResource("1_kukqi")
+
+[node name="MadeBy" type="HBoxContainer" parent="." unique_id=753165718]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -130.0
+offset_right = 201.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="MadeBy" unique_id=1689790585]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+text = "Feito por"
+
+[node name="Button" type="Button" parent="MadeBy" unique_id=118303158]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+text = "Lucas Araujo"
+flat = true
+
+[node name="MainConteiner" type="VBoxContainer" parent="." unique_id=1547591944]
+offset_left = 819.0
+offset_top = 390.0
+offset_right = 1079.0
+offset_bottom = 714.0
+scale = Vector2(1.1861652, 1.1298555)
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainConteiner" unique_id=880228864]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainConteiner/HBoxContainer" unique_id=701396590]
+layout_mode = 2
+alignment = 1
+
+[node name="Voltar" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=925532304]
+layout_mode = 2
+theme = ExtResource("2_5d2l8")
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+shortcut = SubResource("Shortcut_5d2l8")
+text = "Voltar"
+
+[node name="HSeparator2" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=195644198]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator4" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1761511105]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator5" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1046229470]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="Controles" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=328697419]
+layout_mode = 2
+theme = ExtResource("2_5d2l8")
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+text = "Controles"
+
+[node name="HSeparator" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1850583172]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator6" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=902993027]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator7" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1169226636]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="VoltarMenu" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1867119195]
+layout_mode = 2
+theme = ExtResource("2_5d2l8")
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+text = "Menu Principal
+"
+
+[node name="HSeparator3" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1809370745]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator8" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=2078192876]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="HSeparator9" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1680446854]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v4r4p")
+
+[node name="Sair" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1734276138]
+layout_mode = 2
+theme = ExtResource("2_5d2l8")
+theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 44
+text = "Sair
+"
+
+[node name="Controles" parent="." unique_id=1915705132 instance=ExtResource("5_7l7mv")]
+visible = false
+
+[connection signal="pressed" from="MainConteiner/HBoxContainer/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]
+[connection signal="pressed" from="MainConteiner/HBoxContainer/VBoxContainer/Controles" to="." method="_on_controles_pressed"]
+[connection signal="pressed" from="MainConteiner/HBoxContainer/VBoxContainer/VoltarMenu" to="." method="_on_voltar_menu_pressed"]
+[connection signal="pressed" from="MainConteiner/HBoxContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]

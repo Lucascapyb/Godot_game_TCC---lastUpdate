@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bhocq1nvoadvv"]
+
+[ext_resource type="Script" uid="uid://dnxmfgtjskocg" path="res://scripts/botão_puzle_one.gd" id="1_dwhuo"]
+[ext_resource type="Texture2D" uid="uid://dq1pmf6ybub1j" path="res://assets/ui/art/8.png" id="2_pu5xi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwhuo"]
+radius = 150.01334
+
+[node name="Area2D" type="Area2D" unique_id=162424672]
+process_mode = 3
+script = ExtResource("1_dwhuo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1099287400]
+shape = SubResource("CircleShape2D_dwhuo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2035511798]
+texture_filter = 3
+scale = Vector2(0.20818907, 0.18938245)
+texture = ExtResource("2_pu5xi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

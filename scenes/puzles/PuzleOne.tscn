@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://bfbi5wmew0lfm"]
+
+[ext_resource type="Texture2D" uid="uid://dujm4hxn84vl7" path="res://assets/ui/art/telaa.png" id="1_3curx"]
+[ext_resource type="Script" uid="uid://kqen6yy05pxh" path="res://scripts/puzle_one.gd" id="1_5bgl1"]
+[ext_resource type="Theme" uid="uid://wda66uf3jje1" path="res://botoes_defalt.tres" id="2_5bgl1"]
+[ext_resource type="Texture2D" uid="uid://2phar2uc0yvt" path="res://assets/ui/art/bortoes.png" id="3_ilxsr"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="3_qar5d"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7l7mv"]
+action = &"Config"
+
+[sub_resource type="Shortcut" id="Shortcut_1ikne"]
+events = [SubResource("InputEventAction_7l7mv")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44ix1"]
+
+[node name="puzleOne" type="CanvasLayer" unique_id=574515810]
+script = ExtResource("1_5bgl1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1530364214]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1764706)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1985379128]
+offset_left = 222.0
+offset_top = -5.0
+offset_right = 1486.0
+offset_bottom = 1259.0
+scale = Vector2(1.316234, 0.8767672)
+texture = ExtResource("1_3curx")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1059359999]
+offset_left = 344.99997
+offset_top = -6.0
+offset_right = 1609.0
+offset_bottom = 1258.0
+scale = Vector2(1.1211443, 0.85846406)
+texture = ExtResource("3_ilxsr")
+
+[node name="MainConteiner" type="VBoxContainer" parent="." unique_id=1053825643]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -138.0
+offset_top = 297.0
+offset_right = -138.0
+offset_bottom = 621.0
+grow_horizontal = 2
+scale = Vector2(1.1861652, 1.1298555)
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainConteiner" unique_id=1834984300]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainConteiner/HBoxContainer" unique_id=386357190]
+layout_mode = 2
+alignment = 1
+
+[node name="Voltar" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=71322832]
+layout_mode = 2
+theme = ExtResource("2_5bgl1")
+theme_override_fonts/font = ExtResource("3_qar5d")
+theme_override_font_sizes/font_size = 44
+shortcut = SubResource("Shortcut_1ikne")
+text = "Voltar"
+
+[node name="HSeparator2" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1153550913]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator4" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1747034965]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator5" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=723999283]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="Controles" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=441136772]
+layout_mode = 2
+theme = ExtResource("2_5bgl1")
+theme_override_fonts/font = ExtResource("3_qar5d")
+theme_override_font_sizes/font_size = 44
+text = "Controles"
+
+[node name="HSeparator" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1102801915]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator6" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=2048349936]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator7" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=240181410]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="VoltarMenu" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=1874274480]
+layout_mode = 2
+theme = ExtResource("2_5bgl1")
+theme_override_fonts/font = ExtResource("3_qar5d")
+theme_override_font_sizes/font_size = 44
+text = "Menu Principal
+"
+
+[node name="HSeparator3" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=56913411]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator8" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=760677688]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="HSeparator9" type="HSeparator" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=173863249]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_44ix1")
+
+[node name="Sair" type="Button" parent="MainConteiner/HBoxContainer/VBoxContainer" unique_id=121635953]
+layout_mode = 2
+theme = ExtResource("2_5bgl1")
+theme_override_fonts/font = ExtResource("3_qar5d")
+theme_override_font_sizes/font_size = 44
+text = "Sair
+"
+
+[node name="Button2" type="Button" parent="." unique_id=1612049536]
+process_mode = 3
+offset_left = 379.0
+offset_top = 103.0
+offset_right = 780.0
+offset_bottom = 169.0
+scale = Vector2(0.7963772, 1.2234869)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_qar5d")
+theme_override_font_sizes/font_size = 44
+text = "Voltar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

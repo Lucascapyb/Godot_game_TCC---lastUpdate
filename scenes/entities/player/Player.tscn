@@ -9,6 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://c4dgpd0ljx7hk" path="res://assets/sprites/Character/Character_Up.png" id="7_68iwh"]
 [ext_resource type="Texture2D" uid="uid://dyu7hcexcljtn" path="res://assets/sprites/Character/Character_UpLeft.png" id="8_ethid"]
 [ext_resource type="Texture2D" uid="uid://c2xqqmi1m1tkc" path="res://assets/sprites/Character/Character_UpRight.png" id="9_d3eos"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="10_6htgn"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_ovfj8"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_68iwh"]
+
+[sub_resource type="Gradient" id="Gradient_6htgn"]
+offsets = PackedFloat32Array(0.35775864, 0.6508621, 0.9698276)
+colors = PackedColorArray(1, 1, 1, 1, 0.94366205, 0.94366205, 0.94366205, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6htgn"]
+gradient = SubResource("Gradient_6htgn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Animation" id="Animation_plywm"]
 resource_name = "IdleDown"
@@ -1050,11 +1063,19 @@ states/Run/node = SubResource("AnimationNodeBlendSpace2D_axlcx")
 states/Run/position = Vector2(694, 93)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dc558")]
 
-[node name="Player" type="CharacterBody2D" unique_id=595824251 node_paths=PackedStringArray("agent", "anim_tree")]
+[sub_resource type="Resource" id="Resource_ethid"]
+script = ExtResource("12_68iwh")
+
+[node name="Player" type="CharacterBody2D" unique_id=595824251 node_paths=PackedStringArray("agent", "anim_tree", "vision_light")]
 script = ExtResource("1_afppm")
 agent = NodePath("NavigationAgent2D")
 anim_tree = NodePath("AnimationTree")
 speed = 100.0
+vision_light = NodePath("PointLight2D")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=15144329]
+texture = SubResource("GradientTexture2D_6htgn")
+texture_scale = 8.14
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2049826211]
 texture_filter = 1
@@ -1082,4 +1103,14 @@ debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1339400173]
-position_smoothing_enabled = true
+physics_interpolation_mode = 1
+top_level = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=408492685]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("10_6htgn")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=2093382483]
+script = ExtResource("11_ovfj8")
+tween_resource = SubResource("Resource_ethid")
