@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnasvmpixgjln"]
 
-[ext_resource type="Texture2D" uid="uid://8mqf5nudotxt" path="res://addons/at-icons/mesh/help.svg" id="1_lgsqu"]
 [ext_resource type="Script" uid="uid://dhsqols8ok6xw" path="res://scripts/pc_final.gd" id="1_oao2o"]
+[ext_resource type="Texture2D" uid="uid://cexf2m3tqdwea" path="res://assets/ui/art/npc_tecnico.png" id="2_oao2o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oao2o"]
 radius = 82.05486
@@ -51,10 +51,9 @@ script = ExtResource("1_oao2o")
 shape = SubResource("CircleShape2D_oao2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=250645973]
-modulate = Color(1, 0.011764706, 1, 1)
 texture_filter = 3
-scale = Vector2(5.4451404, 5.4043245)
-texture = ExtResource("1_lgsqu")
+scale = Vector2(0.7876245, 0.74348986)
+texture = ExtResource("2_oao2o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1767956161]
 libraries/ = SubResource("AnimationLibrary_6rhms")

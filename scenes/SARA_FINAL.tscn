@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b55k71vecje68"]
+
+[ext_resource type="Texture2D" uid="uid://blmqlsepre6po" path="res://assets/environment/tiles/sara_terminal_esq_full.png" id="1_hcp16"]
+[ext_resource type="Script" path="res://scripts/sara_terminal.gd" id="2_terminal"]
+
+[node name="Area2D" type="Area2D" unique_id=774449446]
+collision_layer = 0
+script = ExtResource("2_terminal")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1976644094]
+position = Vector2(0.5, 0)
+scale = Vector2(0.29478192, 0.22647189)
+texture = ExtResource("1_hcp16")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1659000958]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1193196006]
+position = Vector2(-8.473267, 2.146511)
+scale = Vector2(1.0465308, 1.1031977)
+polygon = PackedVector2Array(-116.12341, 34.312515, -37, 5, 114, 63, 36.76267, 93.23215)
+
+[node name="InteractionArea" type="CollisionPolygon2D" parent="." unique_id=1467047809]
+polygon = PackedVector2Array(-151, 41, -37, -18, 140, 63, 35, 121)

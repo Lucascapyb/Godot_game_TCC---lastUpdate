@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dk72djqlj67ae" path="res://assets/ui/art/Okay, now I want you to create a character a man wearing a gray shirt with orange hair—cartoon style is fine. He is standing in a semi-profile pose, looking worried and holding a flashlight.png" id="1_qhxo1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmx8k"]
-radius = 150.01334
+radius = 187.0
 
 [node name="PC_puzle_2" type="Area2D" unique_id=1012019453]
 script = ExtResource("1_dmx8k")
@@ -17,6 +17,11 @@ texture_filter = 3
 position = Vector2(-3, 10)
 scale = Vector2(0.17512718, 0.17593035)
 texture = ExtResource("1_qhxo1")
+
+[node name="SolidBody" type="StaticBody2D" parent="." unique_id=560888035]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SolidBody" unique_id=634666956]
+polygon = PackedVector2Array(-171, 71, -24, 24, 140, 84, 4, 168, -117, 128)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

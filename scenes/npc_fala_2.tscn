@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dctp0tqc1y1il"]
 
 [ext_resource type="Script" uid="uid://dywk58hn5m8bo" path="res://scripts/npc_fala_2.gd" id="1_366q5"]
-[ext_resource type="Texture2D" uid="uid://8mqf5nudotxt" path="res://addons/at-icons/mesh/help.svg" id="2_24rm2"]
+[ext_resource type="Texture2D" uid="uid://t6laux31peja" path="res://assets/ui/art/npc_faxineiro.png" id="2_366q5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1xbv"]
 radius = 82.05486
@@ -48,13 +48,13 @@ _data = {
 script = ExtResource("1_366q5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=666536872]
+position = Vector2(-7, 29)
 shape = SubResource("CircleShape2D_g1xbv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1140155544]
-modulate = Color(1, 0.011764706, 1, 1)
 texture_filter = 3
-scale = Vector2(5.4451404, 5.4043245)
-texture = ExtResource("2_24rm2")
+scale = Vector2(1.0454483, 0.7735006)
+texture = ExtResource("2_366q5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=516115406]
 libraries/ = SubResource("AnimationLibrary_entis")

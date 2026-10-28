@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpybg7hir7y3n"]
 
 [ext_resource type="Script" uid="uid://dxqtorhw3drv1" path="res://scripts/npc_porta.gd" id="1_7odnw"]
-[ext_resource type="Texture2D" uid="uid://c1npp67aylg7m" path="res://icon.svg" id="1_pwalv"]
+[ext_resource type="Texture2D" uid="uid://d1y6rn2ia6w2w" path="res://assets/ui/art/npc_seguranca.png" id="2_7odnw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 radius = 13.0
@@ -11,7 +11,7 @@ script = ExtResource("1_7odnw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=46032048]
 scale = Vector2(0.09867471, 0.09945273)
-texture = ExtResource("1_pwalv")
+texture = ExtResource("2_7odnw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1127677944]
 shape = SubResource("CircleShape2D_bhunq")
