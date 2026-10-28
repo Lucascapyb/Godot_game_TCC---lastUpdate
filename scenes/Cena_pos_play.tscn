@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://b5w4b05nriemb"]
+
+[ext_resource type="Script" uid="uid://c2cs5q2yb4bvq" path="res://scripts/cena_pos_play.gd" id="1_nxwbm"]
+[ext_resource type="FontFile" uid="uid://cvyudsa6sgnd1" path="res://assets/fonts/Chewy-Regular.ttf" id="3_o2ps8"]
+
+[node name="Control" type="Control" unique_id=706125690]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nxwbm")
+
+[node name="bg_overlay" type="ColorRect" parent="." unique_id=1803997756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -41.0
+offset_right = -6.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Texto" type="HBoxContainer" parent="." unique_id=1713639027]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -907.0
+offset_top = -946.0
+offset_right = 1832.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.67367315, 1)
+alignment = 1
+
+[node name="Label" type="Label" parent="Texto" unique_id=474835653]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o2ps8")
+theme_override_font_sizes/font_size = 44
+text = "D.E.L.T.A. - RELATÓRIO CONFIDENCIAL
+
+As inteligências artificiais já administram tudo: cidades, rotinas, decisões.
+
+No centro de tudo, a D.E.L.T.A. No centro da empresa, a S.A.R.A, System for Artificial Resolution of Anomalies.
+
+Algo deu errado. Segundo o relatório, a S.A.R.A. assumiu o controle da instalação. As comunicações foram cortadas, e os operadores desapareceram dos registros.
+
+Você é um cientista contratado pela empresa e, por algum motivo, o único com acesso liberado.
+
+Lá dentro, a S.A.R.A. vai conversar com você. Ela diz que quer ajudar. A empresa diz que ela é um risco.
+
+Siga as pistas. Questione o que ouvir. A decisão final será sua."
+
+[node name="MadeBy3" type="HBoxContainer" parent="." unique_id=800877092]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -706.0
+offset_top = -169.0
+offset_right = 712.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 1.03892)
+alignment = 1
+
+[node name="Label" type="Label" parent="MadeBy3" unique_id=343797795]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o2ps8")
+theme_override_font_sizes/font_size = 44
+text = "Trabalho de Conclusão de Curso em "
+
+[node name="Button" type="Button" parent="MadeBy3" unique_id=1922670600]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_o2ps8")
+theme_override_font_sizes/font_size = 44
+text = "Ciencia da Computação "
+flat = true
+
+[node name="Label2" type="Label" parent="MadeBy3" unique_id=482035339]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o2ps8")
+theme_override_font_sizes/font_size = 44
+text = "pela intituição UDF.
+ Criador: Lucas Araujo e Silva Cruz"
+
+[node name="Button2" type="Button" parent="." unique_id=1580021416]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 14.0
+offset_right = 458.0
+offset_bottom = 80.0
+scale = Vector2(1.0832435, 1.3794425)
+theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_o2ps8")
+theme_override_font_sizes/font_size = 44
+text = "Continuar"
+flat = true
+
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

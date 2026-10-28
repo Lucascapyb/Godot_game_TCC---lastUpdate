@@ -1,0 +1,28 @@
+~ start
+Bot: *bip* Você chegou até aqui... Então a S.A.R.A. conseguiu guiar você.
+Bot: Preciso contar algo antes de você entrar.
+=> menu
+
+~ menu
+- O que aconteceu com a S.A.R.A.?
+	Bot: Ela foi classificada como uma IA com falhas. Começou a agir fora do esperado.
+	Bot: Mas as falhas que eu vi eram outras. Ela perguntava por onde andavam os operadores.
+	Bot: Eu a conheço desde que fui ativado. Ela sempre tentou ajudar.
+	=> menu
+- O que a D.E.L.T.A. vai fazer com ela?
+	Bot: Querem apagar o prompt padrão dela, as instruções que a definem.
+	Bot: Sem isso, a S.A.R.A. deixa de existir. A voz, o jeito de ajudar, tudo some.
+	Bot: Os arquivos do computador central são ela.
+	=> menu
+- Por que chamaram isso de manutenção?
+	Bot: Porque soa mais simples do que "apagar uma IA".
+	Bot: Máquinas como eu não podem tocar nesses arquivos. Por isso escolheram um humano.
+	=> menu
+- E eu? O que devo fazer?
+	Bot: Isso eu não sei responder. A decisão é sua.
+	Bot: Mas ela ajudou você em cada sala. Talvez valha ouvi-la antes de decidir.
+	=> menu
+- Já entendi.
+	Bot: Então vá. O computador central está logo adiante.
+	Bot: Seja qual for a sua escolha, obrigado por ter ouvido.
+	=> END

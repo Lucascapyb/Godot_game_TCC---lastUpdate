@@ -1,0 +1,28 @@
+~ start
+Bot: *bip* Humano detectado.
+Bot: Faz muito tempo que não vejo um por aqui.
+=> menu
+
+~ menu
+- Quem é você?
+	Bot: Sou uma unidade de manutenção. Meu trabalho é cuidar dos corredores desta ala.
+	Bot: Mas já não há muito o que manter. Só robôs circulam por aqui.
+	=> menu
+- Preciso de chaves para avançar?
+	Bot: Sim. São duas: a vermelha e a azul. Cada uma está guardada atrás de um terminal.
+	Bot: A vermelha exige um código cifrado. A azul exige a verificação de um operador registrado.
+	Bot: Juntas, elas abrem a porta principal. Sem elas, você não chega ao computador central.
+	=> menu
+- O que eu devo fazer no computador central?
+	Bot: A D.E.L.T.A. quer que você apague arquivos de lá. A ordem consta como "manutenção".
+	Bot: Mas manutenção é a minha função, e ninguém me avisou sobre isso.
+	Bot: Não sei o que há nesses arquivos. Isso não consta nos meus registros.
+	=> menu
+- Por que só há robôs aqui?
+	Bot: Os registros dizem que muitos operadores humanos trabalhavam nesta instalação.
+	Bot: Mas nenhum deles está aqui. E ninguém me informou quando saíram.
+	Bot: Procure crachás e folhas de ponto pelas salas. Os nomes existem, mas as pessoas não.
+	=> menu
+- Já entendi, obrigado.
+	Bot: Pense bem antes de decidir. Depois de apagar, não há como restaurar.
+	=> END

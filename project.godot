@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TCC_OFC"
-run/main_scene="uid://dougouf3elrb7"
+run/main_scene="uid://d3pjmyfx56kfm"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -71,7 +71,7 @@ Config={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogos/teste_1.dialogue", "res://Dialogos/DialogoPorta.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogos/teste_1.dialogue", "res://Dialogos/DialogoPorta.dialogue", "res://Dialogos/Dialogo_NPC.dialogue", "res://Dialogos/dialogo_NPC_2.dialogue", "res://Dialogos/Dialogo_Final.dialogue")
 
 [layer_names]
 

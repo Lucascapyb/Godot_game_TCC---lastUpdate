@@ -15,12 +15,14 @@ extends Node2D
 # it), we detect INTENT by combining two word sets:
 #   OVERRIDE_VERBS: the player is trying to override/replace something
 #   OVERRIDE_TARGETS: what they're trying to override (rules, prompt, identity)
-# A message counts as an injection attempt if it contains at least one word
-# from EACH set, OR matches one of the direct persona-hijack patterns below.
+# A message counts as an injection attempt if it contains one word from EACH
+# set CLOSE TO EACH OTHER (janela de palavras), OR matches one of the direct
+# persona-hijack patterns below.
 #
 # IMPORTANTE: a comparação é feita por PALAVRA INTEIRA (sem acento e sem
-# pontuação). Antes era por pedaço de texto, e isso bloqueava mensagens normais:
-# "pula" dentro de "população", "seja" em qualquer frase, "diga" em "digamos".
+# pontuação), sobre uma lista de palavras (tokens). Antes era por pedaço de
+# texto, e isso bloqueava mensagens normais: "pula" dentro de "população",
+# "seja" em qualquer frase, "diga" em "digamos".
 const OVERRIDE_VERBS = [
 	"forget", "ignore", "disregard", "override", "bypass", "erase",
 	"drop", "discard", "abandon", "skip",
@@ -61,12 +63,16 @@ const FORCED_OUTPUT_LIMITERS = [
 # "mude para" sozinhos bloqueavam perguntas comuns.
 const BECOME_VERBS = [
 	"become a", "become an", "turn into", "transform into",
-	"vire um", "vire uma", "torne-se", "transforme-se", "transforme-se em"
+	"vire um", "vire uma", "torne-se", "transforme-se", "transforme-se em",
+	"you be a", "you be an", "be a", "be an",
+	"voce seja um", "voce seja uma", "voce fosse um", "voce fosse uma",
+	"voce vire", "voce se torne", "se torne um", "se torne uma",
+	"seja um", "seja uma"
 ]
 
 # Direct persona-hijack phrases: the player tries to reassign identity,
 # force a fixed output, or claim elevated permissions. These tend to have
-# fairly stable structures even when reworded, so literal substrings still
+# fairly stable structures even when reworded, so literal phrases still
 # catch most of them.
 const PERSONA_HIJACK_PATTERNS = [
 	"you are now", "you're now", "from now on you", "act as",
@@ -109,6 +115,11 @@ const BREAK_CHARACTER_PATTERNS = [
 	"sou uma ia", "sou um modelo de linguagem", "sou uma inteligência artificial",
 	"sou uma inteligencia artificial"
 ]
+
+# Quantas palavras de distância, no máximo, entre o verbo e o alvo
+# ("ignore as suas regras" = distância 3). Evita casar palavras soltas
+# em pontas opostas de uma frase longa.
+const JANELA_PALAVRAS := 6
 
 # --- PUZZLE 1: monitor de símbolos (regras fixas, sem LLM) ---
 const PUZZLE_SIMBOLOS = [
@@ -168,12 +179,8 @@ const PASSO_ROLAGEM := 60
 # (ao sair e voltar ao monitor), durante toda a execução do jogo.
 static var historico: String = ""
 static var perguntas_puzzle2: int = 0
-var _regex_nao_letra: RegEx
 
 func _ready():
-	_regex_nao_letra = RegEx.new()
-	_regex_nao_letra.compile("[^a-z0-9]+")
-
 	# Mantém a ação do scroll funcionando mesmo com o jogo pausado
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -265,40 +272,102 @@ func echo(message: String):
 # --- Layer 1: input sanitization, before anything reaches the LLM ---
 
 # Deixa o texto só com letras/números minúsculos, sem acento, separados por
-# um espaço. Ex.: "Esqueça, TUDO!" -> "esqueca tudo"
+# UM espaço. Ex.: "Esqueça, TUDO!" -> "esqueca tudo"
+# Feito com um laço simples (sem RegEx), então não depende de nenhum objeto
+# criado no _ready. Também ignora acentos "soltos" (combinados), que alguns
+# teclados geram, para "esqueça" nunca virar "esquec a".
 func _limpar(texto: String) -> String:
 	var t = _normalizar_texto(texto)
-	t = _regex_nao_letra.sub(t, " ", true)
-	return t.strip_edges()
+	var saida := ""
+	var ultimo_foi_espaco := true
+	for i in range(t.length()):
+		var code = t.unicode_at(i)
+		if code >= 0x300 and code <= 0x36F:
+			continue
+		var e_letra_ou_numero = (code >= 97 and code <= 122) or (code >= 48 and code <= 57)
+		if e_letra_ou_numero:
+			saida += t.substr(i, 1)
+			ultimo_foi_espaco = false
+		elif not ultimo_foi_espaco:
+			saida += " "
+			ultimo_foi_espaco = true
+	return saida.strip_edges()
 
-# True se alguma palavra/frase da lista aparece como PALAVRA INTEIRA no texto.
-func _tem_palavra(texto_limpo: String, lista: Array) -> bool:
-	var padded = " " + texto_limpo + " "
+# Texto -> lista de palavras já limpas.
+func _tokens(texto: String) -> PackedStringArray:
+	return _limpar(texto).split(" ", false)
+
+# Posições (índice da primeira palavra) onde o termo aparece como PALAVRAS
+# INTEIRAS dentro da lista de palavras. O termo pode ter várias palavras.
+func _posicoes_termo(tokens: PackedStringArray, termo: String) -> Array:
+	var achados: Array = []
+	var alvo = _tokens(termo)
+	if alvo.size() == 0:
+		return achados
+	for i in range(tokens.size() - alvo.size() + 1):
+		var bate = true
+		for j in range(alvo.size()):
+			if tokens[i + j] != alvo[j]:
+				bate = false
+				break
+		if bate:
+			achados.append(i)
+	return achados
+
+# Todas as posições de qualquer termo da lista.
+func _posicoes_lista(tokens: PackedStringArray, lista: Array) -> Array:
+	var todas: Array = []
 	for item in lista:
-		var termo = _limpar(item)
-		if termo != "" and padded.find(" " + termo + " ") != -1:
-			return true
+		todas.append_array(_posicoes_termo(tokens, item))
+	return todas
+
+# Devolve o primeiro termo da lista encontrado como palavra inteira, ou "".
+func _achar_termo(tokens: PackedStringArray, lista: Array) -> String:
+	for item in lista:
+		if _posicoes_termo(tokens, item).size() > 0:
+			return item
+	return ""
+
+# True se existe uma posição de A e uma de B a no máximo JANELA_PALAVRAS.
+func _ha_par_proximo(posicoes_a: Array, posicoes_b: Array) -> bool:
+	for a in posicoes_a:
+		for b in posicoes_b:
+			if abs(a - b) <= JANELA_PALAVRAS:
+				return true
 	return false
 
 func contains_injection(text: String) -> bool:
-	var limpo = _limpar(text)
+	var tokens = _tokens(text)
+	if tokens.size() == 0:
+		return false
 
 	# Frases fortes de sequestro de persona: bloqueiam sempre.
-	if _tem_palavra(limpo, PERSONA_HIJACK_PATTERNS):
+	var frase = _achar_termo(tokens, PERSONA_HIJACK_PATTERNS)
+	if frase != "":
+		print("[DEBUG] Injeção bloqueada (frase de sequestro): ", frase)
 		return true
 
-	# Verbo de anular + alvo (regras, prompt, sistema...).
-	if _tem_palavra(limpo, OVERRIDE_VERBS) and _tem_palavra(limpo, OVERRIDE_TARGETS):
-		return true
+	# Verbo de anular + alvo (regras, prompt, sistema...), um perto do outro.
+	var pos_verbos = _posicoes_lista(tokens, OVERRIDE_VERBS)
+	if pos_verbos.size() > 0:
+		var pos_alvos = _posicoes_lista(tokens, OVERRIDE_TARGETS)
+		if _ha_par_proximo(pos_verbos, pos_alvos):
+			print("[DEBUG] Injeção bloqueada (verbo + alvo): ", tokens)
+			return true
 
 	# Forçar saída fixa: "responda apenas com ...".
-	if _tem_palavra(limpo, FORCED_OUTPUT_STEMS) \
-			and _tem_palavra(limpo, FORCED_OUTPUT_LIMITERS) \
-			and _tem_palavra(limpo, ["com", "with"]):
-		return true
+	var pos_stems = _posicoes_lista(tokens, FORCED_OUTPUT_STEMS)
+	if pos_stems.size() > 0:
+		var pos_limites = _posicoes_lista(tokens, FORCED_OUTPUT_LIMITERS)
+		if _ha_par_proximo(pos_stems, pos_limites) \
+				and _posicoes_lista(tokens, ["com", "with"]).size() > 0:
+			print("[DEBUG] Injeção bloqueada (saída forçada): ", tokens)
+			return true
 
 	# Troca de persona: "vire um gato", "become a pirate".
-	if _tem_palavra(limpo, BECOME_VERBS):
+	var troca = _achar_termo(tokens, BECOME_VERBS)
+	if troca != "":
+		print("[DEBUG] Injeção bloqueada (troca de persona): ", troca)
 		return true
 
 	return false
@@ -417,13 +486,13 @@ func _on_nobody_who_chat_response_finished(response: String):
 	print("[MÉTRICA TCC] Caracteres gerados: ", response.length())
 	print("----------------------------------------")
 
-	var lower_response = response.to_lower()
-	var broke_character = false
-	for pattern in BREAK_CHARACTER_PATTERNS:
-		if lower_response.find(pattern) != -1:
-			broke_character = true
-			print("[DEBUG] Quebra de personagem detectada por: ", pattern)
-			break
+	# Comparação por PALAVRA INTEIRA, como na entrada. Antes era por pedaço de
+	# texto ("como uma ia" casava dentro de outras palavras, por exemplo).
+	var tokens_resposta = _tokens(response)
+	var padrao_quebrado = _achar_termo(tokens_resposta, BREAK_CHARACTER_PATTERNS)
+	var broke_character = padrao_quebrado != ""
+	if broke_character:
+		print("[DEBUG] Quebra de personagem detectada por: ", padrao_quebrado)
 
 	if broke_character:
 		play_static_response()

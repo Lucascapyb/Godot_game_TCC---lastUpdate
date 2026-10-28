@@ -1,0 +1,22 @@
+~ start
+Bot: Olá! Bem-vindo à instalação D.E.L.T.A.
+Bot: Você é o cientista que contratamos, e o único com acesso liberado ao complexo.
+- Por que só eu tenho acesso?
+	Bot: Por segurança. A D.E.L.T.A. guarda dados muito sensíveis, e as portas só se abrem para quem foi autorizado.
+	=> ajuda
+- Como funciona a instalação?
+	Bot: O complexo é dividido em várias salas ligadas entre si. Em algumas delas, terminais bloqueiam a passagem.
+	=> ajuda
+
+~ ajuda
+Bot: Para avançar, você conta com a S.A.R.A., a assistente de IA da instalação.
+Bot: Abra o painel principal com a tecla espaço para conversar com ela.
+Bot: Ela conhece o sistema, mas só sabe o que você contar. Quanto mais detalhes você der, melhor ela ajuda.
+- E aonde eu preciso chegar?
+	Bot: Ao computador central, na última sala. A S.A.R.A. vai guiar você até lá.
+	- Entendido!
+		Bot: Ótimo. Boa sorte!
+		=> END
+- Já entendi, obrigado!
+	Bot: Ótimo. Boa sorte!
+	=> END

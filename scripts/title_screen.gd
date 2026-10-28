@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _on_start_btn_pressed() -> void:
 	musica_menu.stop()
-	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
+	get_tree().change_scene_to_file("res://scenes/Cena_pos_play.tscn")
 
 
 func _on_credit_btn_pressed() -> void:
