@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://fn575hpsr4q8"]
 
-[ext_resource type="Texture2D" uid="uid://c5rym8wxp4nqd" path="res://addons/at-icons/animation/chess_queen.svg" id="1_56hm2"]
 [ext_resource type="Script" uid="uid://dgunygdkpni7h" path="res://scripts/puzle_2_tela_registro.gd" id="1_cqkvk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_plx7o"]
@@ -15,7 +14,6 @@ shape = SubResource("CircleShape2D_plx7o")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1492579539]
 texture_filter = 3
 scale = Vector2(12.489061, 10.828704)
-texture = ExtResource("1_56hm2")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

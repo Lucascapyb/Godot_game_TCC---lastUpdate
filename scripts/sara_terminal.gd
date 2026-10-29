@@ -9,6 +9,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	get_viewport().set_input_as_handled()
 	opening_ending = true
+	ComputerSound.play_open()
 	var error := get_tree().change_scene_to_file("res://scenes/sara_ending.tscn")
 	if error != OK:
 		opening_ending = false

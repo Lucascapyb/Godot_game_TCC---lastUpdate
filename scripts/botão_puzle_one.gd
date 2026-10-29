@@ -21,5 +21,8 @@ func _process(_delta: float) -> void:
 
 
 func abrir_puzzle() -> void:
+	if puzzle_ui.visible:
+		return
+	ComputerSound.play_open()
 	get_tree().paused = true
 	puzzle_ui.show()

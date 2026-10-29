@@ -1,0 +1,79 @@
+~ estante_1
+Livros antigos preenchem as prateleiras. Algumas páginas estão rasgadas.
+Você reconhece palavras soltas, mas nenhuma parece contar a história inteira.
+=> END
+
+~ estante_2
+Os livros mais interessantes estão lá em cima.
+Alguém claramente não pensou na sua altura.
+=> END
+
+~ estante_3
+Um manual promete explicar tudo em apenas quatrocentas páginas.
+Você decide continuar sem saber tudo.
+=> END
+
+~ estante_4
+Entre relatórios e livros técnicos, há um pequeno espaço vazio.
+Talvez alguém tenha levado sua história favorita antes de partir.
+=> END
+
+~ mesa_1
+Papéis espalhados. Uma cadeira afastada.
+Parece que alguém precisou sair antes de terminar.
+=> END
+
+~ mesa_2
+Tudo está cuidadosamente alinhado.
+Até a poeira parece respeitar a organização.
+=> END
+
+~ mesa_3
+Há riscos na madeira e uma anotação quase apagada: "continuar amanhã".
+Você se pergunta há quantos amanhãs ela está aqui.
+=> END
+
+~ mesa_4
+Esta mesa já deve ter presenciado reuniões muito importantes.
+Agora, sua maior responsabilidade é segurar a poeira.
+=> END
+
+~ balcao_1
+Há marcas de canecas sobre a madeira.
+Você se pergunta quanto café era necessário para manter este lugar funcionando.
+=> END
+
+~ balcao_2
+Um dos compartimentos está emperrado.
+Você tenta com cuidado. Ele prefere continuar guardando seus segredos.
+=> END
+
+~ balcao_3
+O balcão está vazio, exceto por um retângulo sem poeira.
+Alguma coisa ficou aqui por muito tempo. Agora não está mais.
+=> END
+
+~ balcao_4
+Você encontra uma etiqueta: "não deixar objetos pessoais".
+As marcas na madeira sugerem que ninguém levou isso muito a sério.
+=> END
+
+~ banco_1
+Um banco de madeira. Parece um bom lugar para sentar e descansar um pouco.
+Mas ainda há coisas a fazer.
+=> END
+
+~ banco_2
+Este banco já acomodou muita gente.
+Agora, está apenas esperando alguém se sentar.
+=> END
+
+~ banco_3
+A madeira está gasta no meio do assento.
+Parece que alguém tinha um lugar favorito para descansar.
+=> END
+
+~ banco_4
+Um banco simples, sem encosto.
+Confortável o suficiente para uma pausa. Talvez não para uma soneca.
+=> END

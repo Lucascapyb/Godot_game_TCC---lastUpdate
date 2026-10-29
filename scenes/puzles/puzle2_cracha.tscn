@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://c0xuoogcn1qa6"]
 
-[ext_resource type="Texture2D" uid="uid://b65i2ny1g73gf" path="res://addons/at-icons/animation/chess_pawn.svg" id="1_4uf0y"]
 [ext_resource type="Script" uid="uid://deoc7a7oh7uxi" path="res://scripts/puzle_2_cracha.gd" id="1_833bg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_plx7o"]
@@ -15,7 +14,6 @@ shape = SubResource("CircleShape2D_plx7o")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1492579539]
 texture_filter = 3
 scale = Vector2(12.489061, 10.828704)
-texture = ExtResource("1_4uf0y")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

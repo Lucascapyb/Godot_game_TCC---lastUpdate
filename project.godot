@@ -22,6 +22,9 @@ DialogueManager="*uid://c3rodes2l3gxb"
 MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 Global="*uid://ee7llsiu8ll2"
+MenuMusic="*res://scripts/menu_music.gd"
+ComputerSound="*res://scripts/computer_sound.gd"
+ArrivalSound="*res://scripts/arrival_sound.gd"
 
 [dialogue_manager]
 
@@ -71,7 +74,7 @@ Config={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogos/teste_1.dialogue", "res://Dialogos/DialogoPorta.dialogue", "res://Dialogos/Dialogo_NPC.dialogue", "res://Dialogos/dialogo_NPC_2.dialogue", "res://Dialogos/Dialogo_Final.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogos/teste_1.dialogue", "res://Dialogos/DialogoPorta.dialogue", "res://Dialogos/Dialogo_NPC.dialogue", "res://Dialogos/dialogo_NPC_2.dialogue", "res://Dialogos/Dialogo_Final.dialogue", "res://Dialogos/NPC_Puzzle_Direita.dialogue", "res://Dialogos/NPC_Puzzle_Esquerda.dialogue", "res://Dialogos/Moveis.dialogue")
 
 [layer_names]
 

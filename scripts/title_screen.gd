@@ -1,15 +1,12 @@
 extends Control
 
-@onready var musica_menu: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	musica_menu.play()
+	MenuMusic.play_menu()
 
 
 func _on_start_btn_pressed() -> void:
-	musica_menu.stop()
+	MenuMusic.stop()
 	get_tree().change_scene_to_file("res://scenes/Cena_pos_play.tscn")
 
 

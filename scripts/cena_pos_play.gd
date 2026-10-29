@@ -6,6 +6,7 @@ extends Control
 var som := AudioStreamPlayer.new()
 var tween: Tween
 var terminou := false
+var iniciando_fase := false
 
 func _ready() -> void:
 	continuar.visible = false
@@ -36,4 +37,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_terminar()
 
 func _on_button_2_pressed() -> void:
+	if iniciando_fase:
+		return
+	iniciando_fase = true
+	continuar.disabled = true
+	ArrivalSound.play_arrival()
 	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")

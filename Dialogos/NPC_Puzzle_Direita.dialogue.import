@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dawwnxmdxycfn"
+path="res://.godot/imported/NPC_Puzzle_Direita.dialogue-969936bb8905969f5bbfcd1866c77222.tres"
+
+[deps]
+
+source_file="res://Dialogos/NPC_Puzzle_Direita.dialogue"
+dest_files=["res://.godot/imported/NPC_Puzzle_Direita.dialogue-969936bb8905969f5bbfcd1866c77222.tres"]
+
+[params]
+
+defaults=true

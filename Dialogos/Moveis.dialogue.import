@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://ytgy2jdmi3as"
+path="res://.godot/imported/Moveis.dialogue-ec02933811d2478f4092133b42a081f8.tres"
+
+[deps]
+
+source_file="res://Dialogos/Moveis.dialogue"
+dest_files=["res://.godot/imported/Moveis.dialogue-ec02933811d2478f4092133b42a081f8.tres"]
+
+[params]
+
+defaults=true
