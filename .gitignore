@@ -1,6 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-ggufs/
 *.gguf
-addons/nobodywho/
+!ggufs/gemma-2-2b-it-Q5_K_M.gguf
+addons/nobodywho/*.pdb
+addons/nobodywho/~*
+*.tmp

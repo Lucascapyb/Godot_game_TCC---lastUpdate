@@ -28,9 +28,11 @@
 [ext_resource type="Script" uid="uid://cdldkk4fi246d" path="res://scripts/interaction_prompt.gd" id="26_3t3mo"]
 [ext_resource type="Script" uid="uid://c7ri287vbs4vy" path="res://scripts/npc_puzzle.gd" id="27_03l4r"]
 [ext_resource type="Texture2D" uid="uid://bmhyan7boapl6" path="res://assets/ui/art/npc_aspirador.png" id="28_x1py8"]
+[ext_resource type="AnimationLibrary" uid="uid://dbh01ibysee76" path="res://resources/animations/npc_aspirador_idle.tres" id="29_js75l"]
 [ext_resource type="Material" path="res://resources/tilesets/sara_wall_material.tres" id="29_lpvha"]
 [ext_resource type="Texture2D" uid="uid://cdv7yg8ao12mp" path="res://assets/ui/art/npc_lixeiro.png" id="29_v23gc"]
 [ext_resource type="Script" uid="uid://bc2gpkk4km7wn" path="res://scripts/installation_lighting.gd" id="30_s4ole"]
+[ext_resource type="AnimationLibrary" uid="uid://b8m71fouvgobs" path="res://resources/animations/npc_lixeiro_idle.tres" id="31_syf22"]
 [ext_resource type="Script" uid="uid://d4hgo7ava0nov" path="res://scripts/furniture_interactions.gd" id="32_v23gc"]
 [ext_resource type="Script" uid="uid://b1f0vamqc0rf8" path="res://scripts/phase_music.gd" id="33_n7dut"]
 
@@ -69,12 +71,11 @@ tile_set = ExtResource("1_xy3my")
 
 [node name="Player" parent="." unique_id=1928336466 instance=ExtResource("2_cxv17")]
 z_index = 1
-position = Vector2(5414.765, -1590)
+position = Vector2(7065.998, -2549)
 speed = 200.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1580745371]
 position = Vector2(-4521, 479)
-color = Color(0.08984375, 0.08984375, 0.08984375, 1)
 
 [node name="Botoes_puzle_1" parent="." unique_id=162424672 groups=["interactables"] instance=ExtResource("5_xs4ih")]
 z_index = 5
@@ -267,6 +268,16 @@ texture = ExtResource("28_x1py8")
 [node name="InteractionArea" type="CollisionPolygon2D" parent="NPC_Puzzle_Esquerda" unique_id=25671825]
 polygon = PackedVector2Array(100, 0, 87, 50, 50, 87, 0, 100, -50, 87, -87, 50, -100, 0, -87, -50, -50, -87, 0, -100, 50, -87, 87, -50)
 
+[node name="SolidBody" type="StaticBody2D" parent="NPC_Puzzle_Esquerda" unique_id=1431335948]
+position = Vector2(0, 50)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NPC_Puzzle_Esquerda/SolidBody" unique_id=1458188644]
+polygon = PackedVector2Array(-30, 0, -21, -10, 21, -10, 30, 0, 21, 10, -21, 10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC_Puzzle_Esquerda" unique_id=1421253530]
+libraries/ = ExtResource("29_js75l")
+autoplay = &"idle"
+
 [node name="NPC_Puzzle_Direita" type="Area2D" parent="." unique_id=1007340772 groups=["interactables"]]
 z_index = 1
 position = Vector2(10630.501, -1273)
@@ -280,6 +291,16 @@ texture = ExtResource("29_v23gc")
 
 [node name="InteractionArea" type="CollisionPolygon2D" parent="NPC_Puzzle_Direita" unique_id=1372104099]
 polygon = PackedVector2Array(100, 0, 87, 50, 50, 87, 0, 100, -50, 87, -87, 50, -100, 0, -87, -50, -50, -87, 0, -100, 50, -87, 87, -50)
+
+[node name="SolidBody" type="StaticBody2D" parent="NPC_Puzzle_Direita" unique_id=1258594335]
+position = Vector2(0, 53)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NPC_Puzzle_Direita/SolidBody" unique_id=372538622]
+polygon = PackedVector2Array(-26, 0, -18.2, -10, 18.2, -10, 26, 0, 18.2, 10, -18.2, 10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC_Puzzle_Direita" unique_id=1601632418]
+libraries/ = ExtResource("31_syf22")
+autoplay = &"idle"
 
 [node name="ParedesSalaSARA" type="TileMapLayer" parent="." unique_id=2035835389]
 z_index = 1

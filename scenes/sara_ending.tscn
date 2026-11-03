@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/sara_ending.gd" id="1_ending"]
+[ext_resource type="Texture2D" path="res://assets/ui/art/Game Studio S.A.R.A_protocol logo.png" id="2_game_logo"]
+[ext_resource type="Texture2D" path="res://assets/ui/art/udf-centro-universitario-do-distrito-federal.webp" id="3_udf_logo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_game_logo"]
+atlas = ExtResource("2_game_logo")
+region = Rect2(592, 800, 800, 760)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udf"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+bg_color = Color(0.97, 0.98, 0.99, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="SaraEnding" type="Control"]
 layout_mode = 3
@@ -20,6 +37,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="GameLogo" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 255.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_game_logo")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -91,3 +123,45 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "Voltar ao menu"
+
+[node name="Credits" type="VBoxContainer" parent="Center/Content"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Author" type="Label" parent="Center/Content/Credits"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.93, 0.94, 1)
+theme_override_font_sizes/font_size = 22
+text = "Feito por: Lucas Araujo e Silva Cruz"
+horizontal_alignment = 1
+
+[node name="Advisor" type="Label" parent="Center/Content/Credits"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.93, 0.94, 1)
+theme_override_font_sizes/font_size = 22
+text = "Orientado por: Prof. Kadidja Valeria Reginaldo de Oliveira"
+horizontal_alignment = 1
+
+[node name="Academic" type="Label" parent="Center/Content/Credits"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.8, 0.82, 1)
+theme_override_font_sizes/font_size = 21
+text = "Trabalho de conclusão de curso em Ciência da Computação pela instituição:"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Institution" type="PanelContainer" parent="Center/Content/Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_udf")
+
+[node name="Logo" type="TextureRect" parent="Center/Content/Credits/Institution"]
+custom_minimum_size = Vector2(236, 110)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_udf_logo")
+expand_mode = 1
+stretch_mode = 5

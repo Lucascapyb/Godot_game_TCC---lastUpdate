@@ -1,2 +1,6 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+ggufs/gemma-2-2b-it-Q5_K_M.gguf filter=lfs diff=lfs merge=lfs -text
+addons/nobodywho/*.dll filter=lfs diff=lfs merge=lfs -text
+addons/nobodywho/*.so filter=lfs diff=lfs merge=lfs -text
+addons/nobodywho/*.dylib filter=lfs diff=lfs merge=lfs -text

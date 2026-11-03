@@ -63,8 +63,14 @@ func _choose_delete() -> void:
 			status.text = ""
 		await _show_message(line)
 		await get_tree().create_timer(2.2).timeout
-	# Leave her final question alone on screen before showing the end controls.
+	# Hold her final question before displaying the system's deletion notice.
 	await get_tree().create_timer(3.0).timeout
+	var deletion_notice := create_tween()
+	deletion_notice.tween_property(message, "modulate:a", 0.0, 0.35)
+	await deletion_notice.finished
+	message.text = "Arquivos S.A.R.A. deletados com sucesso"
+	message.visible_ratio = 1.0
+	message.modulate.a = 1.0
 	_show_finish()
 
 func _choose_free() -> void:
@@ -106,8 +112,14 @@ func _play_ending_music(track: AudioStreamMP3) -> void:
 
 func _show_finish() -> void:
 	status.text = ""
+	status.hide()
+	$Center.offset_top = 270.0
+	$Center.offset_bottom = -20.0
+	$Center/Content.add_theme_constant_override("separation", 20)
+	$GameLogo.show()
 	finish.show()
 	menu_button.show()
+	$Center/Content/Credits.show()
 	menu_button.grab_focus()
 
 func _return_to_menu() -> void:
