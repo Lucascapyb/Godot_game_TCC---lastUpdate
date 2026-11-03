@@ -9,7 +9,16 @@ func _ready() -> void:
 	controles_overlay.voltar_pressed.connect(_on_controles_voltar)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Config"):
+	if event.is_action_pressed("Config") and not event.is_echo():
+		if GameState.interaction_busy():
+			return
+		if visible:
+			_on_voltar_pressed()
+			get_viewport().set_input_as_handled()
+			return
+		if get_tree().paused:
+			return
+		get_viewport().set_input_as_handled()
 		visible = true
 		get_tree().paused = true
 
@@ -29,5 +38,7 @@ func _on_controles_voltar() -> void:
 	menu_buttons.visible = true
 
 func _on_voltar_pressed() -> void:
+	controles_overlay.visible = false
+	menu_buttons.visible = true
 	get_tree().paused = false
 	visible = false

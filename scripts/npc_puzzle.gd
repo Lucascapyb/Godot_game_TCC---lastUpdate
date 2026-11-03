@@ -23,9 +23,12 @@ func iniciar_dialogo() -> void:
 	if dialogue == null:
 		push_error("Não foi possível carregar o diálogo: %s" % dialogue_path)
 		return
+	if not GameState.begin_interaction(self):
+		return
 	ocupado = true
 	DialogueManager.show_dialogue_balloon(dialogue, "start")
 	await DialogueManager.dialogue_ended
+	GameState.end_interaction(self)
 	ocupado = false
 
 func _on_body_entered(body: Node2D) -> void:

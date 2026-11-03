@@ -25,39 +25,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Texto" type="HBoxContainer" parent="." unique_id=1713639027]
+[node name="Texto" type="Control" parent="." unique_id=1713639027]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -907.0
-offset_top = -946.0
-offset_right = 1832.0
-offset_bottom = -156.0
+offset_left = 80.0
+offset_top = 120.0
+offset_right = -80.0
+offset_bottom = -280.0
 grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.67367315, 1)
-alignment = 1
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Texto" unique_id=474835653]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 4
 theme_override_fonts/font = ExtResource("3_o2ps8")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 36
 text = "D.E.L.T.A. - RELATÓRIO CONFIDENCIAL
-
 As inteligências artificiais já administram tudo: cidades, rotinas, decisões.
-
 No centro de tudo, a D.E.L.T.A. No centro da empresa, a S.A.R.A, System for Artificial Resolution of Anomalies.
-
 Algo deu errado. Segundo o relatório, a S.A.R.A. assumiu o controle da instalação. As comunicações foram cortadas, e os operadores desapareceram dos registros.
-
-Você é um cientista contratado pela empresa e, por algum motivo, o único com acesso liberado.
-
+Você é um cientista contratado pela empresa (CENSURADO), por algum motivo, o único com acesso liberado.
 Lá dentro, a S.A.R.A. vai conversar com você. Ela diz que quer ajudar. A empresa diz que ela é um risco.
-
 Siga as pistas. Questione o que ouvir. A decisão final será sua."
+autowrap_mode = 3
 
 [node name="MadeBy3" type="HBoxContainer" parent="." unique_id=800877092]
 layout_mode = 1
@@ -86,14 +84,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
 theme_override_fonts/font = ExtResource("3_o2ps8")
 theme_override_font_sizes/font_size = 44
-text = "Ciencia da Computação "
+text = "Ciência da Computação "
 flat = true
 
 [node name="Label2" type="Label" parent="MadeBy3" unique_id=482035339]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_o2ps8")
 theme_override_font_sizes/font_size = 44
-text = "pela intituição UDF.
+text = "pela instituição UDF.
  Criador: Lucas Araujo e Silva Cruz"
 
 [node name="Button2" type="Button" parent="." unique_id=1580021416]

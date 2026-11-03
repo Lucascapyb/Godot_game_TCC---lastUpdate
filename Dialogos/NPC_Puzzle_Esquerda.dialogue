@@ -1,4 +1,34 @@
 ~ start
-NPC Esquerda: Olá! Este é o diálogo provisório do NPC da sala do puzzle da esquerda.
-NPC Esquerda: Minha história será adicionada em breve.
-=> END
+Bot Bibliotecário: *bip* Silêncio, por favor. Ah, é um humano. Pode falar baixo mesmo assim.
+Bot Bibliotecário: Esta biblioteca ficou vazia por muito tempo. Faz bem ter alguém aqui.
+=> menu
+
+~ menu
+- Quem é você?
+	Bot Bibliotecário: Bibliotecário da instalação. Eu catalogava, emprestava e restaurava os livros e registros.
+	Bot Bibliotecário: Hoje ninguém empresta nada. Cuido do acervo mesmo assim.
+	=> menu
+- Você conhece a S.A.R.A.?
+	Bot Bibliotecário: Conheço. Ela salvou o acervo.
+	Bot Bibliotecário: A D.E.L.T.A. ordenou o descarte dos arquivos antigos para liberar espaço. Eram anos de registros.
+	Bot Bibliotecário: A S.A.R.A. interveio, reorganizou tudo e guardou o que podia ser preservado.
+	=> menu
+- O que ela guardou?
+	Bot Bibliotecário: Manuais, mapas, relatórios técnicos. Está tudo em ordem, melhor do que eu mesmo mantinha.
+	Bot Bibliotecário: Só que as prateleiras de pessoal, de fichas e de históricos de operadores, ela disse que estavam corrompidas.
+	Bot Bibliotecário: Eu nunca cheguei a abrir uma delas para conferir.
+	=> menu
+- Por que não conferiu?
+	Bot Bibliotecário: Ela nunca errou comigo. Não via motivo para duvidar.
+	Bot Bibliotecário: Mas um bibliotecário sabe que prateleira vazia deixa marca. Ali não ficou nenhuma.
+	Bot Bibliotecário: Nem sei dizer se isso me incomoda ou se é só zelo de ofício.
+	=> menu
+- Os operadores frequentavam a biblioteca?
+	Bot Bibliotecário: Com frequência. Alguns ficavam horas, lendo ou conversando comigo.
+	Bot Bibliotecário: Perguntei à S.A.R.A. por eles. Ela respondeu que foram realocados, com muito cuidado.
+	Bot Bibliotecário: Foi uma resposta gentil. Mas realocação costuma deixar um registro de saída, e não encontrei nenhum.
+	=> menu
+- Já entendi, obrigado.
+	Bot Bibliotecário: Volte quando quiser. Se levar algo emprestado, devolva.
+	Bot Bibliotecário: É brincadeira. Aqui já não há prazo de devolução.
+	=> END

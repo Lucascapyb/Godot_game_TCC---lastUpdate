@@ -16,7 +16,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _process(_delta: float) -> void:
-	if player_in_range and Input.is_action_just_pressed("talk"):
+	if player_in_range and not GameState.interaction_busy() and not get_tree().paused and Input.is_action_just_pressed("talk"):
 		abrir_puzzle()
 
 

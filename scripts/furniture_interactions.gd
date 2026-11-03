@@ -34,7 +34,7 @@ func _ready() -> void:
 		furniture.append(area)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if ocupado or get_tree().paused or prompt_controller.dialogue_active:
+	if ocupado or get_tree().paused or GameState.interaction_busy():
 		return
 	if not event.is_action_pressed("talk") or event.is_echo():
 		return
@@ -59,9 +59,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if dialogue == null:
 		push_error("Não foi possível carregar as descrições dos móveis.")
 		return
+	if not GameState.begin_interaction(self):
+		return
 	ocupado = true
 	DialogueManager.show_dialogue_balloon(dialogue, str(nearest.get_meta("dialogue_cue")))
 	await DialogueManager.dialogue_ended
+	GameState.end_interaction(self)
 	ocupado = false
 
 func _furniture_kind(source: int, atlas: Vector2i) -> String:

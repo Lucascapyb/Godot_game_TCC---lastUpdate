@@ -6,6 +6,7 @@ func _ready() -> void:
 
 
 func _on_start_btn_pressed() -> void:
+	GameState.reset_run()
 	MenuMusic.stop()
 	get_tree().change_scene_to_file("res://scenes/Cena_pos_play.tscn")
 

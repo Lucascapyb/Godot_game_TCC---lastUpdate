@@ -3,7 +3,7 @@ extends Area2D
 var opening_ending := false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if opening_ending or not event.is_action_pressed("talk") or event.is_echo():
+	if GameState.interaction_busy() or get_tree().paused or opening_ending or not event.is_action_pressed("talk") or event.is_echo():
 		return
 	if not _player_is_near():
 		return

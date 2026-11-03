@@ -8,13 +8,15 @@ var tween: Tween
 var terminou := false
 var iniciando_fase := false
 
+@export var fadeout_duration: float = 0.8
+
 func _ready() -> void:
 	continuar.visible = false
 	label.visible_ratio = 0.0
 
 	# Cria o player de áudio e toca em loop enquanto o texto aparece
 	add_child(som)
-	som.stream = load("res://assets/audio/sfx/toriel.mp3")
+	som.stream = load("res://assets/audio/sfx/toriel.mp3").duplicate()
 	som.stream.loop = true
 	som.volume_db = -12.0
 	som.pitch_scale = 1.2
@@ -30,6 +32,8 @@ func _terminar() -> void:
 	continuar.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
+	if iniciando_fase:
+		return
 	# Espaço ou Enter antes de acabar: mostra o texto inteiro
 	if event.is_action_pressed("ui_accept") and not terminou:
 		tween.kill()
@@ -41,5 +45,15 @@ func _on_button_2_pressed() -> void:
 		return
 	iniciando_fase = true
 	continuar.disabled = true
+	som.stop()
+	if tween != null and tween.is_valid():
+		tween.kill()
+	$bg_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var fadeout := create_tween().set_parallel(true)
+	for child in get_children():
+		if child is CanvasItem and child != $bg_overlay:
+			fadeout.tween_property(child, "modulate:a", 0.0, fadeout_duration)
+	await fadeout.finished
 	ArrivalSound.play_arrival()
+	await ArrivalSound.finished
 	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")

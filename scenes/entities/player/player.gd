@@ -24,6 +24,8 @@ func _ready():
 		global_position = GameState.player_position
 
 func _unhandled_input(event):
+	if GameState.interaction_busy() or get_tree().paused:
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_RIGHT:
 			follow_mouse = event.pressed
@@ -35,6 +37,13 @@ func _unhandled_input(event):
 			get_tree().change_scene_to_file("res://scenes/MonitorScene.tscn")
 
 func _physics_process(delta):
+	if GameState.interaction_busy():
+		follow_mouse = false
+		agent.target_position = global_position
+		velocity = Vector2.ZERO
+		state_machine.travel("Idle")
+		_stop_footsteps()
+		return
 	if follow_mouse:
 		var click_position = get_global_mouse_position()
 		agent.target_position = click_position

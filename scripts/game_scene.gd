@@ -15,7 +15,7 @@ const OPEN_ATLAS_COORDS := Vector2i(5, 1)
 var aberta := false
 
 func _process(_delta: float) -> void:
-	if Global.passagem_liberada and not aberta:
+	if Global.passagem_liberada and Global.key_red and Global.key_blue and not aberta:
 		abrir_porta()
 
 func abrir_porta() -> void:

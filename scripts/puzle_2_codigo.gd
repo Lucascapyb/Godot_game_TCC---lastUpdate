@@ -25,6 +25,8 @@ BLOCO 3: IDENTIFICAÇÃO (FINAL)
 SEQUÊNCIA: ██ ██ ██"""
 
 var tentativas_restantes := MAX_TENTATIVAS
+var blocked_until := 0
+const STATE_ID := "audit"
 
 
 func _ready() -> void:
@@ -32,6 +34,27 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	label.text = TEXTO_INICIAL
 	line_edit.text_submitted.connect(_on_text_submitted)
+	var saved: Dictionary = GameState.terminals.get(STATE_ID, {})
+	tentativas_restantes = int(saved.get("attempts", MAX_TENTATIVAS))
+	blocked_until = int(saved.get("blocked_until", 0))
+	label.text = str(saved.get("text", label.text))
+	line_edit.placeholder_text = "Digite a sequência e pressione Enter"
+	_update_terminal()
+
+func _save_terminal() -> void:
+	GameState.terminals[STATE_ID] = {"attempts": tentativas_restantes, "blocked_until": blocked_until, "text": label.text}
+
+func _process(_delta: float) -> void:
+	_update_terminal()
+
+func _update_terminal() -> void:
+	if blocked_until > 0 and Time.get_ticks_msec() >= blocked_until:
+		blocked_until = 0
+		tentativas_restantes = MAX_TENTATIVAS
+		label.text += "\nTERMINAL LIBERADO."
+		_save_terminal()
+	line_edit.editable = blocked_until == 0 and not Global.key_blue
+
 
 
 func abrir() -> void:
@@ -72,14 +95,14 @@ func _normalizar(texto: String) -> String:
 
 
 func _on_text_submitted(texto: String) -> void:
-	if texto.strip_edges() == "":
+	if not line_edit.editable or texto.strip_edges() == "":
 		return
 
 	label.text += "\n> " + texto
 
 	if _normalizar(texto) == CODIGO_CORRETO:
 		label.text += "\nSEQUÊNCIA ACEITA. REGISTRO RESTAURADO."
-		coletar_chave_vermelha()
+		coletar_chave_azul()
 		tentativas_restantes = MAX_TENTATIVAS
 	else:
 		tentativas_restantes -= 1
@@ -88,30 +111,29 @@ func _on_text_submitted(texto: String) -> void:
 		else:
 			_bloquear_terminal()
 
+	_save_terminal()
+	_update_terminal()
 	line_edit.clear()
 	await _rolar_para_baixo()
 
 
 func _bloquear_terminal() -> void:
+	blocked_until = Time.get_ticks_msec() + int(TEMPO_BLOQUEIO * 1000)
 	label.text += "\nMUITAS TENTATIVAS INVÁLIDAS. TERMINAL BLOQUEADO POR %d SEGUNDOS." % int(TEMPO_BLOQUEIO)
 	line_edit.editable = false
-	await get_tree().create_timer(TEMPO_BLOQUEIO).timeout
-	line_edit.editable = true
-	tentativas_restantes = MAX_TENTATIVAS
-	label.text += "\nTERMINAL LIBERADO. REVISE OS DOCUMENTOS."
-	await _rolar_para_baixo()
 
 
 func _rolar_para_baixo() -> void:
 	await get_tree().process_frame
 	scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
-	line_edit.grab_focus()
+	if visible:
+		line_edit.grab_focus()
 
 
-func coletar_chave_vermelha() -> void:
-	if not Global.key_red:
-		Global.key_red = true
-		label.text += "\nchave vermelha coletada!"
+func coletar_chave_azul() -> void:
+	if not Global.key_blue:
+		Global.key_blue = true
+		label.text += "\nChave azul coletada!"
 	else:
 		label.text += "\n(registro já restaurado)"
 

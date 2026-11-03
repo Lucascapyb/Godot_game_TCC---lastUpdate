@@ -14,11 +14,14 @@ func _process(delta: float) -> void:
 		iniciar_dialogo()
 
 func iniciar_dialogo() -> void:
+	if not GameState.begin_interaction(self):
+		return
 	ocupado = true
 	som_telefone.play()
 	await som_telefone.finished
 	DialogueManager.show_dialogue_balloon(load("res://Dialogos/DialogoPorta.dialogue"), "start")
 	await DialogueManager.dialogue_ended
+	GameState.end_interaction(self)
 	ocupado = false
 
 func _on_body_entered(body: Node2D) -> void:

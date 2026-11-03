@@ -1,11 +1,11 @@
 ~ start
-if not Global.key_red and not Global.key_blue:
-	Bot: Infelizmente voce não possui as chaves necessarias para continuar!
-	- ok
-	Bot: Vá buscar as chaves
-else 
-	Bot: Voce conseguiu! as chaves estao aqui, avance!
-	- Aqui vamos lá! 
-	Bot: Passagem liberada! vamos lá
+if not Global.key_red or not Global.key_blue:
+	Bot: Infelizmente, você ainda não possui as duas chaves necessárias para continuar!
+	- Entendi.
+	Bot: Busque a chave vermelha e a chave azul nas salas dos desafios.
+else
+	Bot: Você conseguiu! As duas chaves estão aqui.
+	- Aqui vamos nós!
+	Bot: Passagem liberada!
 	set Global.passagem_liberada = true
 => END

@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	prompt.visible = false
-	if get_tree().paused or dialogue_active:
+	if get_tree().paused or GameState.interaction_busy():
 		return
 	var nearby_player := false
 	for node in get_tree().get_nodes_in_group("interactables"):

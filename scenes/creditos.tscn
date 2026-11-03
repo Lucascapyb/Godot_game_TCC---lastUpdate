@@ -126,14 +126,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
 theme_override_fonts/font = ExtResource("3_ul0vb")
 theme_override_font_sizes/font_size = 44
-text = "Ciencia da Computação "
+text = "Ciência da Computação "
 flat = true
 
 [node name="Label2" type="Label" parent="MadeBy3" unique_id=553738411]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ul0vb")
 theme_override_font_sizes/font_size = 44
-text = "pela intituição:"
+text = "pela instituição:"
 
 [node name="Button2" type="Button" parent="." unique_id=407992504]
 offset_left = 4.0

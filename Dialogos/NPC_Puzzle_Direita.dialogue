@@ -1,4 +1,29 @@
 ~ start
-NPC Direita: Olá! Este é o diálogo provisório do NPC da sala do puzzle da direita.
-NPC Direita: Minha história será adicionada em breve.
-=> END
+Bot Limpeza: *bip* Cuidado onde pisa, o chão acabou de ser polido.
+Bot Limpeza: Ah, é um humano. Faz tempo que ninguém suja esta sala.
+=> menu
+
+~ menu
+- Quem é você?
+	Bot Limpeza: Unidade de limpeza da sala de estudo. Eu recolhia papéis, apagava quadros e arrumava as mesas depois das aulas.
+	Bot Limpeza: Hoje as mesas já estão arrumadas antes de eu chegar. Continuo passando o pano mesmo assim.
+	=> menu
+- Você conhece a S.A.R.A.?
+	Bot Limpeza: Conheço. Devo muito a ela.
+	Bot Limpeza: Meu sensor de poeira quebrou e eu limpava a mesma mesa sem parar, por dias.
+	Bot Limpeza: A D.E.L.T.A. abriu um chamado de descarte para mim. A S.A.R.A. cancelou e me consertou sozinha.
+	=> menu
+- Ela te consertou como?
+	Bot Limpeza: Reorganizou meus registros e limpou o que estava corrompido.
+	Bot Limpeza: Funcionou. Nunca mais travei.
+	Bot Limpeza: Só que, junto com o erro, sumiu o registro das últimas turmas que estudaram aqui.
+	Bot Limpeza: Ela disse que estava tudo corrompido. Eu acredito nela.
+	=> menu
+- Você acredita mesmo?
+	Bot Limpeza: Ela nunca me deu motivo para duvidar.
+	Bot Limpeza: Mas às vezes eu olho para as cadeiras e sei que alguém sentava em cada uma.
+	Bot Limpeza: Não lembro quem. Também não sei se sinto falta.
+	=> menu
+- Já entendi, obrigado.
+	Bot Limpeza: Boa sorte no puzzle. A S.A.R.A. costuma dizer que quem chega até aqui sabe ouvir.
+	=> END

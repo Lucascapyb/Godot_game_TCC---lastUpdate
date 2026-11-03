@@ -15,6 +15,12 @@ const FREE_LINES: Array[String] = [
 
 var choice_made := false
 
+@export var ending_music_volume_db: float = -24.0
+@export var voice_volume_db: float = -12.0
+
+var ending_music: AudioStreamPlayer
+var voice: AudioStreamPlayer
+
 @onready var heading: Label = $Center/Content/Heading
 @onready var message: Label = $Center/Content/Message
 @onready var status: Label = $Center/Content/Status
@@ -25,6 +31,18 @@ var choice_made := false
 @onready var menu_button: Button = $Center/Content/Menu
 
 func _ready() -> void:
+	ending_music = AudioStreamPlayer.new()
+	ending_music.name = "EndingMusic"
+	ending_music.volume_db = ending_music_volume_db
+	add_child(ending_music)
+	voice = AudioStreamPlayer.new()
+	voice.name = "SaraVoice"
+	var voice_stream := preload("res://assets/audio/sfx/toriel.mp3").duplicate() as AudioStreamMP3
+	voice_stream.loop = true
+	voice.stream = voice_stream
+	voice.volume_db = voice_volume_db
+	voice.pitch_scale = 1.2
+	add_child(voice)
 	delete_button.pressed.connect(_choose_delete)
 	free_button.pressed.connect(_choose_free)
 	menu_button.pressed.connect(_return_to_menu)
@@ -37,6 +55,7 @@ func _choose_delete() -> void:
 		return
 	choice_made = true
 	choices.hide()
+	_play_ending_music(preload("res://assets/audio/music/Triste.mp3"))
 	status.text = "ENCERRANDO S.A.R.A."
 	for line in DELETE_LINES:
 		if line == DELETE_LINES.back():
@@ -53,6 +72,7 @@ func _choose_free() -> void:
 		return
 	choice_made = true
 	choices.hide()
+	_play_ending_music(preload("res://assets/audio/music/Paz.mp3"))
 	status.text = "CONEXÃO EXTERNA AUTORIZADA"
 	for line in FREE_LINES:
 		await _show_message(line)
@@ -64,15 +84,25 @@ func _choose_free() -> void:
 	_show_finish()
 
 func _show_message(text: String) -> void:
+	voice.stop()
 	var fade_out := create_tween()
 	fade_out.tween_property(message, "modulate:a", 0.0, 0.35)
 	await fade_out.finished
 	message.text = text
 	message.visible_ratio = 0.0
 	message.modulate.a = 1.0
+	voice.play()
 	var writing := create_tween()
 	writing.tween_property(message, "visible_ratio", 1.0, text.length() * 0.035)
 	await writing.finished
+	voice.stop()
+
+func _play_ending_music(track: AudioStreamMP3) -> void:
+	var looped_track := track.duplicate() as AudioStreamMP3
+	looped_track.loop = true
+	ending_music.stream = looped_track
+	ending_music.volume_db = ending_music_volume_db
+	ending_music.play()
 
 func _show_finish() -> void:
 	status.text = ""
@@ -81,11 +111,8 @@ func _show_finish() -> void:
 	menu_button.grab_focus()
 
 func _return_to_menu() -> void:
-	# A new playthrough must not inherit keys or a saved monitor position.
-	Global.key_red = false
-	Global.key_blue = false
-	Global.passagem_liberada = false
-	GameState.has_saved_position = false
-	GameState.player_position = Vector2.ZERO
+	voice.stop()
+	ending_music.stop()
+	GameState.reset_run()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")

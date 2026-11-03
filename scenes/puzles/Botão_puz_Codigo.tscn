@@ -22,7 +22,7 @@ texture = ExtResource("2_mkimv")
 [node name="SolidBody" type="StaticBody2D" parent="." unique_id=1710916375]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SolidBody" unique_id=657091099]
-polygon = PackedVector2Array(-179, 58, -37, -10, 127, 67, 25, 176, -92, 120)
+polygon = PackedVector2Array(-171, 49, -37, -10, 127, 67, 33, 171, -86, 111)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
