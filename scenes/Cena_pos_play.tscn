@@ -17,10 +17,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6.0
-offset_top = -41.0
-offset_right = -6.0
-offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -64,33 +60,32 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -706.0
-offset_top = -169.0
-offset_right = 712.0
-offset_bottom = -50.0
+offset_left = -810.0
+offset_top = -190.0
+offset_right = 810.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1, 1.03892)
 alignment = 1
 
 [node name="Label" type="Label" parent="MadeBy3" unique_id=343797795]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_o2ps8")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 28
 text = "Trabalho de Conclusão de Curso em "
 
 [node name="Button" type="Button" parent="MadeBy3" unique_id=1922670600]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.171875, 1, 0, 1)
 theme_override_fonts/font = ExtResource("3_o2ps8")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 28
 text = "Ciência da Computação "
 flat = true
 
 [node name="Label2" type="Label" parent="MadeBy3" unique_id=482035339]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_o2ps8")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 28
 text = "pela instituição UDF.
  Criador: Lucas Araujo e Silva Cruz"
 

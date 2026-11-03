@@ -154,6 +154,8 @@ func _ready() -> void:
 	input.placeholder_text = "ask sua pergunta… | skip para sair"
 	status_label = Label.new()
 	status_label.name = "ConnectionStatus"
+	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	status_label.add_theme_font_size_override("font_size", 16)
 	status_label.add_theme_color_override("font_color", Color(0.5, 0.9, 0.6))
 	input.get_parent().add_child(status_label)
 	var backend: Node = $LLM

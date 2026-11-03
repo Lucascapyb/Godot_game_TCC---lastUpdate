@@ -8,6 +8,7 @@ var sara_transcript := ""
 var sara_history: Array = []
 var sara_audit = preload("res://scripts/puzzle2_helper.gd").new()
 var terminals: Dictionary = {}
+var windowed_rect := Rect2i()
 
 # Native inference outlives the monitor view, including loading/cancellation.
 signal sara_backend_changed
@@ -40,7 +41,27 @@ func _sara_finished(_response: String) -> void:
 	sara_backend_changed.emit.call_deferred()
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_connect_dialogue.call_deferred()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F11:
+		toggle_fullscreen()
+		get_viewport().set_input_as_handled()
+
+func toggle_fullscreen() -> void:
+	var window := get_window()
+	if window.mode in [Window.MODE_FULLSCREEN, Window.MODE_EXCLUSIVE_FULLSCREEN]:
+		var usable := DisplayServer.screen_get_usable_rect(window.current_screen)
+		if windowed_rect.size == Vector2i.ZERO:
+			var size := Vector2i(1280, 720).min(Vector2i(Vector2(usable.size) * 0.9))
+			windowed_rect = Rect2i(usable.position + (usable.size - size) / 2, size)
+		window.mode = Window.MODE_WINDOWED
+		window.size = windowed_rect.size
+		window.position = windowed_rect.position
+	else:
+		windowed_rect = Rect2i(window.position, window.size)
+		window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 
 func _connect_dialogue() -> void:
 	DialogueManager.dialogue_started.connect(func(_resource): dialogue_active = true)

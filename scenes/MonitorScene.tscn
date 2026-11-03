@@ -88,19 +88,21 @@ color = Color(0.29954743, 0.29954746, 0.29954734, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1804852424]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 25.0
-offset_right = 1080.0
-offset_bottom = 579.0
+offset_left = 65.0
+offset_top = 45.0
+offset_right = 1090.0
+offset_bottom = 595.0
+theme_override_constants/separation = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/VBoxContainer" unique_id=1105024585]
-custom_minimum_size = Vector2(0, 520)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/ScrollContainer" unique_id=1811799412]
-custom_minimum_size = Vector2(1080, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.19750443, 0.8943186, 0.17471924, 1)
 theme_override_font_sizes/font_size = 25
 text = "dhauidhaskjdashhkdashnhk"
@@ -123,8 +125,10 @@ offset_left = -37.0
 offset_top = -7.0
 offset_right = 1189.0
 offset_bottom = 649.0
+mouse_filter = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=515815321]
+top_level = true
 position = Vector2(581, 329.00003)
 scale = Vector2(10, 10)
 zoom = Vector2(1.6, 1.6)
