@@ -38,6 +38,8 @@ func _update_zone() -> void:
 	if initialized and now_inside == inside:
 		return
 	inside = now_inside
+	if inside:
+		GameState.entered_installation = true
 	var target_scale := outdoor_light_scale * indoor_light_multiplier if inside else outdoor_light_scale
 	if not initialized:
 		initialized = true

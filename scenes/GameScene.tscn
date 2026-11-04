@@ -71,11 +71,12 @@ tile_set = ExtResource("1_xy3my")
 
 [node name="Player" parent="." unique_id=1928336466 instance=ExtResource("2_cxv17")]
 z_index = 1
-position = Vector2(7065.998, -2549)
+position = Vector2(1434.2026, 707)
 speed = 200.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1580745371]
 position = Vector2(-4521, 479)
+color = Color(0.03515625, 0.034606934, 0.034606934, 1)
 
 [node name="Botoes_puzle_1" parent="." unique_id=162424672 groups=["interactables"] instance=ExtResource("5_xs4ih")]
 z_index = 5

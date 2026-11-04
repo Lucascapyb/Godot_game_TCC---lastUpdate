@@ -148,6 +148,7 @@ var pending_message := ""
 var status_label: Label
 
 func _ready() -> void:
+	GameState.opened_sara_monitor = true
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	output.text = historico
 	input.max_length = MAX_INPUT_LENGTH + 5

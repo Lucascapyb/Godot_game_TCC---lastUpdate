@@ -9,6 +9,9 @@ var sara_history: Array = []
 var sara_audit = preload("res://scripts/puzzle2_helper.gd").new()
 var terminals: Dictionary = {}
 var windowed_rect := Rect2i()
+var movement_tutorial_completed := false
+var entered_installation := false
+var opened_sara_monitor := false
 
 # Native inference outlives the monitor view, including loading/cancellation.
 signal sara_backend_changed
@@ -85,6 +88,9 @@ func save_player_position(pos: Vector2) -> void:
 	has_saved_position = true
 
 func reset_run() -> void:
+	movement_tutorial_completed = false
+	entered_installation = false
+	opened_sara_monitor = false
 	Global.key_red = false
 	Global.key_blue = false
 	Global.passagem_liberada = false
