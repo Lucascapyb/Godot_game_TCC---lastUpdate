@@ -237,8 +237,8 @@ Encontrou um problema? Abra uma [issue](https://github.com/Lucascapyb/Godot_game
 
 ## Autoria e licenças
 
-**Desenvolvimento e pesquisa:** [Lucas Araujo e Silva Cruz](https://github.com/Lucascapyb).  
-**Orientação:** Prof. Kadidja Valeria Reginaldo de Oliveira.  
+**Desenvolvimento e pesquisa:** [Lucas Araujo e Silva Cruz](https://github.com/Lucascapyb).<br>
+**Orientação:** Prof. Kadidja Valeria Reginaldo de Oliveira.<br>
 **Instituição:** Centro Universitário do Distrito Federal — UDF, Ciência da Computação.
 
 O projeto integra bibliotecas e recursos com condições próprias. Consulte:
