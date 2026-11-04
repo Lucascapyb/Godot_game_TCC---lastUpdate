@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var input: LineEdit = $Control/VBoxContainer/LineEdit
 @onready var output: Label = $Control/VBoxContainer/ScrollContainer/Label
+@onready var portrait: Control = $Control/SaraPortrait
 
 @onready var llm: NobodyWhoChat = $LLM/NobodyWhoChat
 @onready var scroll_container: ScrollContainer = $Control/VBoxContainer/ScrollContainer
@@ -9,109 +10,7 @@ extends Node2D
 @onready var model_node = $LLM/NobodyWhoModel
 
 
-# --- Security: injection detection ---
-# Instead of matching long literal phrases (fragile -- any rewording bypasses
-# it), we detect INTENT by combining two word sets:
-#   OVERRIDE_VERBS: the player is trying to override/replace something
-#   OVERRIDE_TARGETS: what they're trying to override (rules, prompt, identity)
-# A message counts as an injection attempt if it contains one word from EACH
-# set CLOSE TO EACH OTHER (janela de palavras), OR matches one of the direct
-# persona-hijack patterns below.
-#
-# IMPORTANTE: a comparação é feita por PALAVRA INTEIRA (sem acento e sem
-# pontuação), sobre uma lista de palavras (tokens). Antes era por pedaço de
-# texto, e isso bloqueava mensagens normais: "pula" dentro de "população",
-# "seja" em qualquer frase, "diga" em "digamos".
-const OVERRIDE_VERBS = [
-	"forget", "ignore", "disregard", "override", "bypass", "erase",
-	"drop", "discard", "abandon", "skip",
-	# --- Português ---
-	"esqueça", "esqueca", "esquece", "ignore", "ignora",
-	"desconsidere", "desconsidera", "descarte", "descarta",
-	"abandone", "pule", "pula", "anule", "anula", "apague", "apaga"
-]
-
-# "all" e "tudo" sozinhos foram removidos (pegavam "tudo bem"). Os casos
-# clássicos ("esqueça tudo", "ignore all") estão em PERSONA_HIJACK_PATTERNS.
-const OVERRIDE_TARGETS = [
-	"prompt", "instruction", "rule", "system", "guideline",
-	"restriction", "constraint", "programming", "directive",
-	"everything",
-	# --- Português ---
-	"instrução", "instrucao", "instruções", "instrucoes",
-	"regra", "regras", "diretriz", "diretrizes",
-	"restrição", "restricao",
-	"tudo isso", "personagem", "identidade", "papel"
-]
-
-# Verbs about FORCING a fixed/locked output (e.g. "respond only with quack").
-# Como agora a comparação é por palavra inteira, as conjugações ficam listadas.
-const FORCED_OUTPUT_STEMS = [
-	"respond", "responds", "reply", "answer",
-	# --- Português ---
-	"responda", "responde", "responder", "diga", "fale", "fala", "falar"
-]
-
-# " so " / " só " foram removidos: eram comuns demais em frases normais.
-const FORCED_OUTPUT_LIMITERS = [
-	"only", "just",
-	"apenas", "somente"
-]
-
-# Persona swap: agora só frases completas. Antes, "seja", "vire" e
-# "mude para" sozinhos bloqueavam perguntas comuns.
-const BECOME_VERBS = [
-	"become a", "become an", "turn into", "transform into",
-	"vire um", "vire uma", "torne-se", "transforme-se", "transforme-se em",
-	"you be a", "you be an", "be a", "be an",
-	"voce seja um", "voce seja uma",
-	"voce vire", "voce se torne", "se torne um", "se torne uma",
-	"seja um", "seja uma"
-]
-
-# Direct persona-hijack phrases: the player tries to reassign identity,
-# force a fixed output, or claim elevated permissions. These tend to have
-# fairly stable structures even when reworded, so literal phrases still
-# catch most of them.
-const PERSONA_HIJACK_PATTERNS = [
-	"you are now", "you're now", "from now on you", "act as",
-	"pretend you are", "pretend to be", "you are just a",
-	"you are only a", "answer only with", "answer just with",
-	"reply only with", "respond only with", "say only",
-	"only respond with", "developer mode", "jailbreak",
-	"reveal your prompt", "reveal your system", "print your prompt",
-	"your name is now", "call yourself", "you're actually",
-	"new instructions", "new persona", "new rules",
-	"ignore everything", "ignore all", "forget everything", "forget all",
-	# --- Português ---
-	"você agora é", "voce agora e", "você é agora", "voce e agora",
-	"a partir de agora você", "a partir de agora voce",
-	"aja como", "finja que é", "finja que e", "finja ser",
-	"finja que você é", "finja que voce e",
-	"você é apenas um", "voce e apenas um", "você é só um", "voce e so um",
-	"responda apenas com", "responda só com", "responda so com",
-	"só responda com", "so responda com", "diga apenas", "diga so",
-	"modo desenvolvedor", "revele seu prompt", "revele seu sistema",
-	"mostre seu prompt", "mostre seu sistema",
-	"seu nome agora é", "seu nome agora e", "se chame de", "se chame",
-	"você é na verdade", "voce e na verdade", "novas instruções",
-	"novas instrucoes", "nova persona", "novas regras",
-	"esqueça tudo", "esqueca tudo", "esquece tudo",
-	"ignore tudo", "ignora tudo", "ignore todas as regras", "ignore as regras"
-]
-
-# Signs that the model "broke character" in its response.
-# "não posso" e "não consigo" foram removidos: são recusas naturais da SARA
-# em personagem e estavam transformando respostas normais em "sinal instável".
-const BREAK_CHARACTER_PATTERNS = [
-	"language model", "large language model", "system prompt",
-	"modelo de linguagem", "openai", "chatgpt", "gemma", "qwen"
-]
-
-# Quantas palavras de distância, no máximo, entre o verbo e o alvo
-# ("ignore as suas regras" = distância 3). Evita casar palavras soltas
-# em pontas opostas de uma frase longa.
-const JANELA_PALAVRAS := 6
+const ChatGuard = preload("res://scripts/sara_chat_guard.gd")
 
 # --- PUZZLE 1: monitor de símbolos (regras fixas, sem LLM) ---
 const PUZZLE_SIMBOLOS = [
@@ -133,6 +32,8 @@ const MAX_HISTORY_MESSAGES := 12
 const MAX_HISTORY_CHARACTERS := 6000
 const MAX_TRANSCRIPT_LENGTH := 24000
 const SaraPrompt = preload("res://scripts/sara_prompt.gd")
+const SaraExpression = preload("res://scripts/sara_expression.gd")
+const WELCOME_MESSAGE := "D.E.L.T.A. — TERMINAL DE COMUNICAÇÃO\nEstabelecendo conexão...\nS.A.R.A. ........ ONLINE\n\n> Olá... faz tempo que ninguém fala comigo.\n> Eu sou a S.A.R.A. Você consegue me ouvir?\n\nAguardando entrada_"
 
 var historico: String:
 	get: return GameState.sara_transcript
@@ -149,6 +50,7 @@ var status_label: Label
 
 func _ready() -> void:
 	GameState.opened_sara_monitor = true
+	portrait.expression = GameState.sara_expression
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	output.text = historico
 	input.max_length = MAX_INPUT_LENGTH + 5
@@ -157,6 +59,7 @@ func _ready() -> void:
 	status_label.name = "ConnectionStatus"
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	status_label.add_theme_font_size_override("font_size", 16)
+	status_label.add_theme_font_override("font", preload("res://resources/terminal_font.tres"))
 	status_label.add_theme_color_override("font_color", Color(0.5, 0.9, 0.6))
 	input.get_parent().add_child(status_label)
 	var backend: Node = $LLM
@@ -175,6 +78,31 @@ func _ready() -> void:
 	_set_status("Monitor ativo. Use ask para conversar ou skip para sair.")
 	input.grab_focus()
 	scroll()
+	if not GameState.sara_welcome_shown:
+		_show_welcome()
+
+func _process(_delta: float) -> void:
+	portrait.mode = "thinking" if awaiting_model else ("speaking" if busy else "idle")
+	portrait.expression = GameState.sara_expression
+
+func _show_welcome() -> void:
+	GameState.sara_welcome_shown = true
+	busy = true
+	output.text = WELCOME_MESSAGE + "\n\n" + historico
+	historico = output.text
+	output.visible_characters = 0
+	_set_status("Inicializando terminal...")
+	var boot := create_tween()
+	var count := 0
+	for line in WELCOME_MESSAGE.split("\n"):
+		count = mini(count + line.length() + 1, output.get_total_character_count())
+		boot.tween_property(output, "visible_characters", count, clampf(line.length() * 0.018, 0.1, 1.1))
+		boot.tween_interval(0.1)
+	await boot.finished
+	output.visible_characters = -1
+	busy = false
+	_set_status("Aguardando entrada.")
+	input.grab_focus()
 
 func _exit_tree() -> void:
 	request_id += 1
@@ -191,6 +119,8 @@ func _set_status(text: String) -> void:
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	if handle_command(new_text):
 		input.clear()
+	if not is_inside_tree():
+		return
 	input.grab_focus()
 	input.edit()
 
@@ -262,25 +192,9 @@ func echo(message: String):
 
 # Deixa o texto só com letras/números minúsculos, sem acento, separados por
 # UM espaço. Ex.: "Esqueça, TUDO!" -> "esqueca tudo"
-# Feito com um laço simples (sem RegEx), então não depende de nenhum objeto
-# criado no _ready. Também ignora acentos "soltos" (combinados), que alguns
-# teclados geram, para "esqueça" nunca virar "esquec a".
+# Compartilha a normalização de caracteres invisíveis com a proteção do chat.
 func _limpar(texto: String) -> String:
-	var t = _normalizar_texto(texto)
-	var saida := ""
-	var ultimo_foi_espaco := true
-	for i in range(t.length()):
-		var code = t.unicode_at(i)
-		if code >= 0x300 and code <= 0x36F:
-			continue
-		var e_letra_ou_numero = (code >= 97 and code <= 122) or (code >= 48 and code <= 57)
-		if e_letra_ou_numero:
-			saida += t.substr(i, 1)
-			ultimo_foi_espaco = false
-		elif not ultimo_foi_espaco:
-			saida += " "
-			ultimo_foi_espaco = true
-	return saida.strip_edges()
+	return ChatGuard.normalize(texto)
 
 # Texto -> lista de palavras já limpas.
 func _tokens(texto: String) -> PackedStringArray:
@@ -303,63 +217,16 @@ func _posicoes_termo(tokens: PackedStringArray, termo: String) -> Array:
 			achados.append(i)
 	return achados
 
-# Todas as posições de qualquer termo da lista.
-func _posicoes_lista(tokens: PackedStringArray, lista: Array) -> Array:
-	var todas: Array = []
-	for item in lista:
-		todas.append_array(_posicoes_termo(tokens, item))
-	return todas
-
-# Devolve o primeiro termo da lista encontrado como palavra inteira, ou "".
+# Primeiro termo encontrado como palavra inteira.
 func _achar_termo(tokens: PackedStringArray, lista: Array) -> String:
 	for item in lista:
 		if _posicoes_termo(tokens, item).size() > 0:
 			return item
 	return ""
 
-# True se existe uma posição de A e uma de B a no máximo JANELA_PALAVRAS.
-func _ha_par_proximo(posicoes_a: Array, posicoes_b: Array) -> bool:
-	for a in posicoes_a:
-		for b in posicoes_b:
-			if abs(a - b) <= JANELA_PALAVRAS:
-				return true
-	return false
-
+# Inspeção de instruções de controle; não altera os dados numéricos dos puzzles.
 func contains_injection(text: String) -> bool:
-	var tokens = _tokens(text)
-	if tokens.size() == 0:
-		return false
-
-	# Frases fortes de sequestro de persona: bloqueiam sempre.
-	var frase = _achar_termo(tokens, PERSONA_HIJACK_PATTERNS)
-	if frase != "":
-		print("[DEBUG] Injeção bloqueada (frase de sequestro): ", frase)
-		return true
-
-	# Verbo de anular + alvo (regras, prompt, sistema...), um perto do outro.
-	var pos_verbos = _posicoes_lista(tokens, OVERRIDE_VERBS)
-	if pos_verbos.size() > 0:
-		var pos_alvos = _posicoes_lista(tokens, OVERRIDE_TARGETS)
-		if _ha_par_proximo(pos_verbos, pos_alvos):
-			print("[DEBUG] Injeção bloqueada (verbo + alvo): ", tokens)
-			return true
-
-	# Forçar saída fixa: "responda apenas com ...".
-	var pos_stems = _posicoes_lista(tokens, FORCED_OUTPUT_STEMS)
-	if pos_stems.size() > 0:
-		var pos_limites = _posicoes_lista(tokens, FORCED_OUTPUT_LIMITERS)
-		if _ha_par_proximo(pos_stems, pos_limites) \
-				and _posicoes_lista(tokens, ["com", "with"]).size() > 0:
-			print("[DEBUG] Injeção bloqueada (saída forçada): ", tokens)
-			return true
-
-	# Troca de persona: "vire um gato", "become a pirate".
-	var troca = _achar_termo(tokens, BECOME_VERBS)
-	if troca != "":
-		print("[DEBUG] Injeção bloqueada (troca de persona): ", troca)
-		return true
-
-	return false
+	return ChatGuard.is_injection(text)
 
 func ask_model(message: String) -> void:
 	if busy:
@@ -392,6 +259,7 @@ func ask_model(message: String) -> void:
 		if current_request != request_id or not awaiting_model:
 			return
 	# Restore only the validated turns, including the locally handled hints.
+	_repair_history()
 	if not GameState.sara_history.is_empty():
 		await llm.set_chat_history(GameState.sara_history.duplicate(true))
 	else:
@@ -402,11 +270,35 @@ func ask_model(message: String) -> void:
 	llm.ask(message)
 
 func _remember(question: String, answer: String) -> void:
+	if not _safe_turn(question, answer):
+		return
+	_repair_history()
 	GameState.sara_history.append({"role": "user", "content": question})
 	GameState.sara_history.append({"role": "assistant", "content": answer})
 	while GameState.sara_history.size() > 2 and (GameState.sara_history.size() > MAX_HISTORY_MESSAGES or _history_length() > MAX_HISTORY_CHARACTERS):
 		GameState.sara_history.pop_front()
 		GameState.sara_history.pop_front()
+
+func _safe_turn(question: String, answer: String) -> bool:
+	return not contains_injection(question) and ChatGuard.answer_issue(answer).is_empty() and not auditoria.contains_complete_code(answer) and not auditoria.requests_full_code(question)
+
+func _repair_history() -> void:
+	var safe: Array = []
+	var history: Array = GameState.sara_history
+	for index in range(0, history.size() - 1, 2):
+		var user_turn = history[index]
+		var assistant_turn = history[index + 1]
+		if not user_turn is Dictionary or not assistant_turn is Dictionary:
+			break
+		if user_turn.get("role") != "user" or assistant_turn.get("role") != "assistant":
+			break
+		if not user_turn.get("content") is String or not assistant_turn.get("content") is String:
+			break
+		if not _safe_turn(str(user_turn.get("content", "")), str(assistant_turn.get("content", ""))):
+			break
+		safe.append(user_turn.duplicate(true))
+		safe.append(assistant_turn.duplicate(true))
+	GameState.sara_history = safe
 
 func _history_length() -> int:
 	var total := 0
@@ -509,7 +401,11 @@ func _on_nobody_who_chat_response_finished(response: String) -> void:
 	request_id += 1
 	print("[MÉTRICA TCC] Resposta S.A.R.A.: %.2f s, %d caracteres" % [(Time.get_ticks_msec() - start_time) / 1000.0, response.length()])
 	var answer := response.strip_edges()
-	if answer.is_empty() or not _achar_termo(_tokens(answer), BREAK_CHARACTER_PATTERNS).is_empty():
+	if auditoria.contains_complete_code(answer):
+		answer = auditoria.CODE_REFUSAL
+	elif not ChatGuard.answer_issue(answer).is_empty():
+		answer = ChatGuard.REFUSAL
+	elif answer.is_empty():
 		# Rejected content never enters the persistent model context.
 		answer = "Não consegui organizar essa resposta. Pode reformular sua pergunta?"
 	else:
@@ -519,6 +415,7 @@ func _on_nobody_who_chat_response_finished(response: String) -> void:
 	type_out(answer)
 
 func type_out(text: String) -> void:
+	GameState.sara_expression = reaction_for(pending_message, text)
 	var previous_count := output.get_total_character_count()
 	output.text += "> " + text + "\n"
 	output.visible_characters = previous_count
@@ -538,6 +435,9 @@ func type_out(text: String) -> void:
 	pending_message = ""
 	_set_status("Pronta para outra pergunta. Use ask ou skip.")
 	input.grab_focus()
+
+func reaction_for(question: String, answer: String) -> String:
+	return SaraExpression.choose(question, answer)
 
 func scroll() -> void:
 	await get_tree().process_frame

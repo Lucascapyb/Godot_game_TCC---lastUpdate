@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dougouf3elrb7"]
 
 [ext_resource type="Script" uid="uid://boto2npud6yek" path="res://scripts/monitor_scene.gd" id="1_ejx86"]
+[ext_resource type="SystemFont" path="res://resources/terminal_font.tres" id="2_e6lu7"]
 [ext_resource type="Shader" uid="uid://cr4i0csta487f" path="res://shaders/ctr_vhs_fx.gdshader" id="2_ex8wa"]
+[ext_resource type="Script" path="res://scripts/sara_portrait.gd" id="3_36304"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_ynank"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_o8hex"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_e6lu7"]
@@ -80,11 +82,11 @@ color = Color(0.5555749, 0.65736586, 0.46022934, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Control" unique_id=1355668935]
 layout_mode = 0
-offset_left = -14.0
-offset_top = -10.0
-offset_right = 1169.0
-offset_bottom = 655.0
-color = Color(0.29954743, 0.29954746, 0.29954734, 1)
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 1240.0
+offset_bottom = 750.0
+color = Color(0.012, 0.025, 0.016, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1804852424]
 layout_mode = 0
@@ -95,28 +97,40 @@ offset_bottom = 595.0
 theme_override_constants/separation = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/VBoxContainer" unique_id=1105024585]
+custom_minimum_size = Vector2(735, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/ScrollContainer" unique_id=1811799412]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.19750443, 0.8943186, 0.17471924, 1)
-theme_override_font_sizes/font_size = 25
-text = "dhauidhaskjdashhkdashnhk"
+theme_override_colors/font_color = Color(0.45, 1, 0.58, 1)
+theme_override_fonts/font = ExtResource("2_e6lu7")
+theme_override_font_sizes/font_size = 22
 autowrap_mode = 3
 
 [node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer" unique_id=445652116]
 layout_mode = 2
 theme_override_colors/font_placeholder_color = Color(0.19651324, 0.9012801, 0, 0.6)
 theme_override_colors/clear_button_color_pressed = Color(0.3372549, 1, 0.3372549, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_fonts/font = ExtResource("2_e6lu7")
+theme_override_font_sizes/font_size = 22
 placeholder_text = "ask sua pergunta | skip para sair"
 keep_editing_on_text_submit = true
 caret_blink = true
 text_direction = 1
+
+[node name="SaraPortrait" type="Control" parent="Control" unique_id=1487946024]
+anchors_preset = 0
+offset_left = 845.0
+offset_top = 100.0
+offset_right = 1090.0
+offset_bottom = 440.0
+mouse_filter = 2
+script = ExtResource("3_36304")
+terminal_font = ExtResource("2_e6lu7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=515815321]
 top_level = true

@@ -12,6 +12,8 @@ var windowed_rect := Rect2i()
 var movement_tutorial_completed := false
 var entered_installation := false
 var opened_sara_monitor := false
+var sara_welcome_shown := false
+var sara_expression := "happy"
 
 # Native inference outlives the monitor view, including loading/cancellation.
 signal sara_backend_changed
@@ -91,6 +93,8 @@ func reset_run() -> void:
 	movement_tutorial_completed = false
 	entered_installation = false
 	opened_sara_monitor = false
+	sara_welcome_shown = false
+	sara_expression = "happy"
 	Global.key_red = false
 	Global.key_blue = false
 	Global.passagem_liberada = false

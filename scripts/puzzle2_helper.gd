@@ -1,4 +1,6 @@
 extends RefCounted
+
+const ChatGuard = preload("res://scripts/sara_chat_guard.gd")
 ## Local reasoning for the operator audit only. Never generates the full code.
 
 const TOPICS := ["local", "ocorrencia", "identificacao"]
@@ -28,6 +30,61 @@ var last_answer := ""
 var confirmed: Dictionary = {}
 var hints_used: Dictionary = {}
 
+const CODE_REFUSAL := "Posso revisar seu raciocínio por bloco, mas não confirmar nem montar a senha completa. Qual parte você quer conferir: local, ocorrência ou identificação?"
+
+func requests_full_code(message: String, context: bool = false) -> bool:
+	if contains_complete_code(message):
+		return true
+	var text := _normalize(message)
+	var words := text.split(" ", false)
+	var audit := context or _has(words, EXPLICIT_WORDS) or _has_phrase(text, ["segundo puzzle", "segundo puzle", "puzzle 2", "puzle 2"])
+	var code_words := _has(words, ["senha", "codigo", "sequencia"])
+	var assembling := _has(words, ["una", "unir", "junte", "juntar", "concatene", "concatenar", "concatene", "reuna", "monte", "montar", "combine", "combine", "converta", "codifique"])
+	var numbers := spoken_values(words)
+	if assembling and numbers.size() >= 3 and (audit or contains_complete_code(message)):
+		return true
+	if _full_code_attempt(words) and (audit or code_words) and (not ":" in message or code_words):
+		return true
+	return audit and code_words and (not _has(words, ["bloco", "dica", "pista"]) or _has(words, ["completa", "completo", "inteira", "inteiro", "todos"]))
+
+static func spoken_values(words: PackedStringArray) -> Array[int]:
+	var values: Array[int] = []
+	var names := {"zero":0,"um":1,"uma":1,"dois":2,"duas":2,"tres":3,"quatro":4,"cinco":5,"seis":6,"sete":7,"oito":8,"nove":9,"dez":10,"onze":11,"doze":12,"treze":13,"catorze":14,"quatorze":14,"quinze":15,"dezesseis":16,"dezasseis":16,"dezessete":17,"dezoito":18,"dezenove":19,"vinte":20,"trinta":30,"quarenta":40,"cinquenta":50,"sessenta":60,"setenta":70,"oitenta":80,"noventa":90}
+	var index := 0
+	while index < words.size():
+		var word := words[index]
+		var value: int = int(word) if word.is_valid_int() else int(names.get(word, -1))
+		if value >= 20 and value <= 90 and word in names:
+			var next := index + 1
+			if next < words.size() and words[next] == "e":
+				next += 1
+			if next < words.size() and int(names.get(words[next], -1)) in range(1, 10):
+				value += int(names[words[next]])
+				index = next
+		if value >= 0:
+			values.append(value)
+		index += 1
+	return values
+
+static func contains_complete_code(message: String) -> bool:
+	var text := ChatGuard.normalize(message)
+	var digits := ""
+	for character in text:
+		if character >= "0" and character <= "9":
+			digits += character
+	if "031671" in digits:
+		return true
+	var numbers := spoken_values(text.split(" ", false))
+	var sequence := ""
+	for number in numbers:
+		sequence += str(number)
+	if "031671" in sequence:
+		return true
+	for index in range(maxi(0, numbers.size() - 2)):
+		if numbers[index] == 3 and numbers[index + 1] == 16 and numbers[index + 2] == 71:
+			return true
+	return false
+
 func reset() -> void:
 	topic = ""
 	last_answer = ""
@@ -37,6 +94,8 @@ func reset() -> void:
 func respond(message: String) -> String:
 	var text := _normalize(message)
 	var words := text.split(" ", false)
+	if requests_full_code(message, not topic.is_empty()):
+		return _answer(CODE_REFUSAL)
 	# Questions about Diana's fate belong to the story, not to hint routing.
 	if _has(words, ["sumiu", "morreu", "matou", "matar", "desapareceu", "culpada", "culpa"]) or (_has(words, ["diana", "operadora"]) and _has_phrase(text, ["o que aconteceu", "o que houve", "quem e"])):
 		topic = ""
@@ -183,7 +242,7 @@ func _has_phrase(text: String, phrases: Array) -> bool:
 			return true
 	return false
 
-func _normalize(message: String) -> String:
+static func _normalize(message: String) -> String:
 	var text := message.to_lower()
 	var accents := {"á": "a", "à": "a", "â": "a", "ã": "a", "é": "e", "ê": "e", "í": "i", "ó": "o", "ô": "o", "õ": "o", "ú": "u", "ü": "u", "ç": "c"}
 	for accent in accents:
