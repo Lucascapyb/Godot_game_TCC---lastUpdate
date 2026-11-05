@@ -14,6 +14,7 @@ var entered_installation := false
 var opened_sara_monitor := false
 var sara_welcome_shown := false
 var sara_expression := "happy"
+var phase_music: Node
 
 # Native inference outlives the monitor view, including loading/cancellation.
 signal sara_backend_changed
@@ -90,6 +91,9 @@ func save_player_position(pos: Vector2) -> void:
 	has_saved_position = true
 
 func reset_run() -> void:
+	if is_instance_valid(phase_music):
+		phase_music.queue_free()
+	phase_music = null
 	movement_tutorial_completed = false
 	entered_installation = false
 	opened_sara_monitor = false

@@ -66,6 +66,8 @@ func _ready() -> void:
 	if not is_instance_valid(GameState.sara_backend):
 		remove_child(backend)
 		GameState.attach_sara_backend(backend)
+		# Native node references may be absent after release scene serialization.
+		llm.model_node = model_node
 		llm.system_prompt = SaraPrompt.TEXT
 		_connect_worker()
 		llm.start_worker()
@@ -336,6 +338,7 @@ func _restart_worker() -> void:
 	worker_failed = false
 	GameState.sara_worker_failed = false
 	GameState.sara_worker_ready = false
+	llm.model_node = model_node
 	llm.start_worker()
 
 

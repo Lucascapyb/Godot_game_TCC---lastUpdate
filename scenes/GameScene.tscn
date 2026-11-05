@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cpybg7hir7y3n" path="res://scenes/npc_porta.tscn" id="18_icif4"]
 [ext_resource type="PackedScene" uid="uid://dctp0tqc1y1il" path="res://scenes/npc_fala_2.tscn" id="20_2gh7q"]
 [ext_resource type="PackedScene" uid="uid://cnasvmpixgjln" path="res://scenes/pc_final.tscn" id="21_a5tct"]
-[ext_resource type="PackedScene" path="res://scenes/key_hud.tscn" id="22_key_hud"]
+[ext_resource type="PackedScene" uid="uid://bvu2gb4w20f74" path="res://scenes/key_hud.tscn" id="22_key_hud"]
 [ext_resource type="Texture2D" uid="uid://cv57o5ybvvyvl" path="res://assets/environment/tiles/sara_terminal_esq_body.png" id="23_f2kej"]
 [ext_resource type="Texture2D" uid="uid://dng8m2byfew3h" path="res://assets/environment/tiles/sara_terminal_dir_body.png" id="24_3t3mo"]
 [ext_resource type="PackedScene" uid="uid://b55k71vecje68" path="res://scenes/SARA_FINAL.tscn" id="25_a8ip2"]
@@ -71,12 +71,12 @@ tile_set = ExtResource("1_xy3my")
 
 [node name="Player" parent="." unique_id=1928336466 instance=ExtResource("2_cxv17")]
 z_index = 1
-position = Vector2(1434.2026, 707)
+position = Vector2(1480.2092, 779)
 speed = 200.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1580745371]
 position = Vector2(-4521, 479)
-color = Color(0.03515625, 0.034606934, 0.034606934, 1)
+color = Color(0.03125, 0.03100586, 0.03100586, 1)
 
 [node name="Botoes_puzle_1" parent="." unique_id=162424672 groups=["interactables"] instance=ExtResource("5_xs4ih")]
 z_index = 5
@@ -122,7 +122,12 @@ shape = SubResource("RectangleShape2D_pynjx")
 [node name="Colisao3" type="StaticBody2D" parent="." unique_id=1334633759]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Colisao3" unique_id=1539563922]
-position = Vector2(754.0294, 624.01025)
+position = Vector2(474.06702, 729)
+rotation = 0.9237372
+shape = SubResource("RectangleShape2D_pynjx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colisao3" unique_id=1669564792]
+position = Vector2(474.06702, 729)
 rotation = 0.9237372
 shape = SubResource("RectangleShape2D_pynjx")
 

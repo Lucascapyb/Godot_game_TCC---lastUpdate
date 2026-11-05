@@ -22,6 +22,7 @@ extends CanvasLayer
 
 ## A sound player for voice lines (if they exist).
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
+var typing_voice: AudioStreamPlayer
 
 ## Temporary game states
 var temporary_game_states: Array = []
@@ -73,6 +74,14 @@ var mutation_cooldown: Timer = Timer.new()
 
 func _ready() -> void:
 	balloon.hide()
+	typing_voice = AudioStreamPlayer.new()
+	typing_voice.name = "TypingVoice"
+	var voice_stream := preload("res://assets/audio/sfx/toriel.mp3").duplicate() as AudioStreamMP3
+	voice_stream.loop = true
+	typing_voice.stream = voice_stream
+	typing_voice.pitch_scale = 0.85
+	typing_voice.volume_db = -20.0
+	add_child(typing_voice)
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one
@@ -90,6 +99,12 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	var speaking := is_instance_valid(dialogue_line) and visible and balloon.is_visible_in_tree() and dialogue_label.is_typing and not dialogue_line.has_tag("voice")
+	if speaking:
+		if not typing_voice.playing:
+			typing_voice.play()
+	else:
+		typing_voice.stop()
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 

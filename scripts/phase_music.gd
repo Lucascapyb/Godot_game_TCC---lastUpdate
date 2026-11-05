@@ -15,8 +15,16 @@ var inside := false
 var crossfade: Tween
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	if is_instance_valid(GameState.phase_music):
+		# Returning from the monitor reuses the players and their playback positions.
+		GameState.phase_music.set("lighting", lighting)
+		queue_free()
+		return
+	GameState.phase_music = self
 	ambient = _create_player("Exterior", preload("res://assets/audio/sfx/yt._ambient.mp3"))
 	suspense = _create_player("Interior", preload("res://assets/audio/sfx/musica suspense.mp3"))
+	reparent.call_deferred(GameState)
 
 func _create_player(player_name: String, track: AudioStreamMP3) -> AudioStreamPlayer:
 	var player := AudioStreamPlayer.new()
@@ -29,6 +37,19 @@ func _create_player(player_name: String, track: AudioStreamMP3) -> AudioStreamPl
 	return player
 
 func _process(_delta: float) -> void:
+	if is_queued_for_deletion():
+		return
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+	if scene.scene_file_path not in ["res://scenes/GameScene.tscn", "res://scenes/MonitorScene.tscn"]:
+		if GameState.phase_music == self:
+			GameState.phase_music = null
+		queue_free()
+		return
+	# The map's lighting node is absent while the chat scene is open.
+	if not is_instance_valid(lighting):
+		return
 	# Share the lighting's zone decision, including its doorway handling.
 	if not lighting.initialized:
 		return
