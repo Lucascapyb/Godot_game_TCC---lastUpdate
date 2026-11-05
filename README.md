@@ -14,6 +14,7 @@
 <p align="center">
   <a href="#o-jogo">O jogo</a> ·
   <a href="#como-jogar">Como jogar</a> ·
+  <a href="https://drive.google.com/drive/folders/1RDdcgZ2Z08jJwFml23EGNvcafeOJhg5T">Baixar o jogo</a> ·
   <a href="#como-a-sara-funciona">Como a S.A.R.A. funciona</a> ·
   <a href="#executar-o-projeto">Executar o projeto</a> ·
   <a href="#testes-e-evidências">Testes</a>
@@ -82,9 +83,18 @@ skip
 
 ### Quero jogar sem abrir o código
 
-A distribuição executável está em preparação. **Ainda não há um pacote publicado nas [Releases](https://github.com/Lucascapyb/Godot_game_TCC---lastUpdate/releases).** Por enquanto, a versão do repositório pode ser executada pelo editor Godot, seguindo as instruções abaixo.
+**[Baixar S.A.R.A. Protocol V1.0 pelo Google Drive](https://drive.google.com/drive/folders/1RDdcgZ2Z08jJwFml23EGNvcafeOJhg5T)**
 
-Uma distribuição Windows precisa acompanhar o executável com os recursos do jogo, a biblioteca nativa e o modelo. O `.exe` sozinho não contém tudo o que a S.A.R.A. precisa para conversar.
+Não é necessário instalar o Godot nem ter uma chave de API para jogar. Baixe o pacote do seu sistema disponível na pasta do Drive e **extraia a pasta inteira antes de executar**.
+
+| Sistema | Como iniciar após extrair |
+|---|---|
+| Windows 64 bits | Abra `SARA_V1.0.exe` dentro da pasta extraída. |
+| Linux x86_64 | Na pasta extraída, execute `chmod +x SARA_V1.0.x86_64` e depois `./SARA_V1.0.x86_64`. |
+
+Mantenha o executável, o arquivo `.pck`, a biblioteca nativa (`.dll` no Windows ou `.so` no Linux) e a pasta `ggufs` juntos. O modelo acompanha o pacote; as conversas funcionam localmente, sem internet após o download. O arquivo compactado tem aproximadamente **2,1 GB**, principalmente por incluir o modelo de linguagem.
+
+A versão Linux passou por testes de inicialização e de respostas da S.A.R.A. no Ubuntu via WSL, em modo sem interface gráfica. A interface gráfica e o áudio ainda precisam ser validados em um desktop Linux. Consulte também o `LEIA-ME.txt` incluído no pacote.
 
 ## Como a S.A.R.A. funciona
 
